@@ -2,23 +2,39 @@
 *****************************************************************************************************
 	CodeCommunity_Analandia / https://github.com/BlackCode777/CodeCommunity_Analandia.git
 *****************************************************************************************************
+ Nome do Grupo - CodeCommunity - contatos da comunidade
+ 
+# Primeira aula de Lógica - data 18/06/2023 - Gustavp Guanabara
+		https://www.youtube.com/watch?v=8mei6uVttho&list=PLHz_AreHm4dmSj0MHol_aoNYCSGFqvfXV
 
-    // Nome do Grupo - CodeCommunity - contatos da comunidade
-    // 55 21 981154636 - Davi
-    // 55 21 974361393 - Joao Victor
-    // 55 21 991709744 - Marcio Rogerio
-    // 55 21 986518477 - Marcao
-    // 55 21 992935618 - Luciene
-    // 55 21 965758628 - Joao Pedro
+https://github.com/BlackCode777/CodeCommunity_Analandia
+
+Esse é nosso repositório de código. A intenção é que todo código de desenvolvermos juntos eu vou postar nesse repositório !  
+Para ficar como forma de consulta pra vcs quando estiverem estudando poderem olhar o que foi feito em nossas salas de estudo. 
+Recomendo a todos que ainda não tem cadastro na plataforma do GitHub  criem uma conta no GitHub. Por gentileza guardem
+as sua senhas e o nome de usuario que vcs cadastraram na plaforma, pq vamos precisar para fazermos configurações globais no 
+sistema do computador de cada um de vcs.
+Tarefas:
+		1) - Cadastrar uma conta no GitHub!
+		2) - Guardar suas senhas e usuários cadastrado na plataforma( em arquivo *.txt ou arquivo word )
+		
 
 recomendações:
 	1) - instalar o whatsapp no pc
 	2) - instalar o java na máquina - ( config. variavel de ambiente, instalar o maven variavel de ambiente )
 	3) - instalar o VsCode na máquina 
 
+Bom dia Irmãos, não sei se vcs perceberam, mas nesse vídeo que eu postei aqui no grupo, não tem só esse vídeo,
+tem uma playlist com 17 vídeos, incentivo a vcs continuarem a assitindo ao s vídeos, são importantes, esse início
+é a fundação da casa de vcs então estudem ! É só o começo ! Vou deixar duas perguntas pra vcs pensarem
+
 Perguntas:
 	O que são algoritmos?
-	De acordo com o vídeo vcs conseguem Citar alguns exemplos de algoritmos do nosso dia a dia?
+	De acordo com o vídeo que vcs assistiram, conseguem Citar alguns exemplos de algoritmos do nosso dia a dia?
+
+    // 55 21 981154636 - Davi // 55 21 974361393 - Joao Victor // 55 21 991709744 - Marcio Rogerio
+    // 55 21 986518477 - Marcao // 55 21 992935618 - Luciene // 55 21 965758628 - Joao Pedro
+
 
 
 *****************************************************************************************************

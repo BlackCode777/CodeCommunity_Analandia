@@ -16,7 +16,7 @@ Bem-vindo(a) ao grupo de Tecnologia para Iniciantes de Programação!
 
   <p float="left">
 
-   <img src="https://newvoice.ai/wp-content/uploads/2019/08/img-Integrac%CC%A7a%CC%83o-homem-ma%CC%81quina-e%CC%81-acelerada-e-irreversi%CC%81vel-diz-especialista.png" width="200" />
+   <img src="https://newvoice.ai/wp-content/uploads/2019/08/img-Integrac%CC%A7a%CC%83o-homem-ma%CC%81quina-e%CC%81-acelerada-e-irreversi%CC%81vel-diz-especialista.png" width="1200" />
 
   </p>
 

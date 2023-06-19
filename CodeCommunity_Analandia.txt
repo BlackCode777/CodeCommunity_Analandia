@@ -1,0 +1,24 @@
+*****************************************************************************************************
+*****************************************************************************************************
+	CodeCommunity_Analandia / https://github.com/BlackCode777/CodeCommunity_Analandia.git
+*****************************************************************************************************
+
+    // Nome do Grupo - CodeCommunity - contatos da comunidade
+    // 55 21 981154636 - Davi
+    // 55 21 974361393 - Joao Victor
+    // 55 21 991709744 - Marcio Rogerio
+    // 55 21 986518477 - Marcao
+    // 55 21 992935618 - Luciene
+    // 55 21 965758628 - Joao Pedro
+
+recomendações:
+	1) - instalar o whatsapp no pc
+	2) - instalar o java na máquina - ( config. variavel de ambiente, instalar o maven variavel de ambiente )
+	3) - instalar o VsCode na máquina 
+
+Perguntas:
+	O que são algoritmos?
+	De acordo com o vídeo vcs conseguem Citar alguns exemplos de algoritmos do nosso dia a dia?
+
+
+*****************************************************************************************************

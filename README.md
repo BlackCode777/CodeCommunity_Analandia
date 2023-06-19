@@ -11,3 +11,13 @@ Fique à vontade para compartilhar tutoriais, artigos interessantes, desafios de
 Junte-se a nós e embarque nessa jornada emocionante para desenvolver habilidades de programação, explorar novas tecnologias e construir uma base sólida para seu futuro na área de tecnologia. Estamos ansiosos para aprender e crescer juntos!
 
 Bem-vindo(a) ao grupo de Tecnologia para Iniciantes de Programação!
+
+<div align="center"> 
+
+  <p float="left">
+
+   <img src="https://newvoice.ai/wp-content/uploads/2019/08/img-Integrac%CC%A7a%CC%83o-homem-ma%CC%81quina-e%CC%81-acelerada-e-irreversi%CC%81vel-diz-especialista.png" width="200" />
+
+  </p>
+
+</div>

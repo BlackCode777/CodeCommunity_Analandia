@@ -1,3 +1,13 @@
+<div align="center"> 
+
+  <p float="left">
+
+   <img src="https://newvoice.ai/wp-content/uploads/2019/08/img-Integrac%CC%A7a%CC%83o-homem-ma%CC%81quina-e%CC%81-acelerada-e-irreversi%CC%81vel-diz-especialista.png" width="1200" />
+
+  </p>
+
+</div>
+
 # CodeCommunity_Analandia
 
 Bem-vindo(a) ao grupo de Tecnologia para Iniciantes de Programação! Este é um espaço dedicado a todos que estão dando os primeiros passos no mundo da programação e desejam aprender mais sobre esse emocionante campo.
@@ -12,12 +22,4 @@ Junte-se a nós e embarque nessa jornada emocionante para desenvolver habilidade
 
 Bem-vindo(a) ao grupo de Tecnologia para Iniciantes de Programação!
 
-<div align="center"> 
 
-  <p float="left">
-
-   <img src="https://newvoice.ai/wp-content/uploads/2019/08/img-Integrac%CC%A7a%CC%83o-homem-ma%CC%81quina-e%CC%81-acelerada-e-irreversi%CC%81vel-diz-especialista.png" width="1200" />
-
-  </p>
-
-</div>

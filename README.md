@@ -29,9 +29,9 @@ Bem-vindo(a) ao grupo de Tecnologia para Iniciantes de Programação!
 4) - Banco de Dados: Conceitos fundamentais de bancos de dados e linguagem SQL para gerenciamento e manipulação de dados.
 5) - Estruturas de Dados: Listas, pilhas, filas, árvores e grafos, entre outras estruturas de dados essenciais para armazenar e organizar informações.
 6) - Algoritmos: Estudo de algoritmos comuns, como pesquisa, ordenação e algoritmos de grafos, para resolver problemas de forma eficiente.
-6) - Programação Orientada a Objetos: Conceitos fundamentais de POO, como classes, objetos, herança, polimorfismo e encapsulamento.
-7) - Desenvolvimento Mobile: Introdução ao desenvolvimento de aplicativos para dispositivos móveis usando frameworks como React Native ou Flutter.
-8) - Controle de Versão: Uso de sistemas de controle de versão, como Git, para gerenciar projetos e colaborar com outros desenvolvedores.
-9) - Segurança da Informação: Princípios básicos de segurança cibernética e boas práticas para proteger aplicativos e dados.
-10) - Resolução de Problemas: Habilidades para analisar problemas complexos, dividindo-os em partes menores e aplicando soluções algorítmicas.
-11) - Testes e Depuração: Técnicas de teste e depuração de software para identificar e corrigir erros em programas.
+7) - Programação Orientada a Objetos: Conceitos fundamentais de POO, como classes, objetos, herança, polimorfismo e encapsulamento.
+8) - Desenvolvimento Mobile: Introdução ao desenvolvimento de aplicativos para dispositivos móveis usando frameworks como React Native ou Flutter.
+9) - Controle de Versão: Uso de sistemas de controle de versão, como Git, para gerenciar projetos e colaborar com outros desenvolvedores.
+10) - Segurança da Informação: Princípios básicos de segurança cibernética e boas práticas para proteger aplicativos e dados.
+11) - Resolução de Problemas: Habilidades para analisar problemas complexos, dividindo-os em partes menores e aplicando soluções algorítmicas.
+12) - Testes e Depuração: Técnicas de teste e depuração de software para identificar e corrigir erros em programas.

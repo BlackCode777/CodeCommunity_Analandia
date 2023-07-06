@@ -23,6 +23,7 @@ Junte-se a nós e embarque nessa jornada emocionante para desenvolver habilidade
 Bem-vindo(a) ao grupo de Tecnologia para Iniciantes de Programação!
 
 # Ementa de matérias que vamos abordar:
+
 1) - Introdução à Programação: Fundamentos básicos de programação, como lógica, algoritmos, estruturas de controle e tipos de dados.
 2) - Desenvolvimento Web: HTML, CSS e JavaScript para criação de páginas web interativas e responsivas.
 3) - Linguagens de Programação: Python, Java, C++ ou JavaScript como linguagens populares para começar a programar.
@@ -35,3 +36,5 @@ Bem-vindo(a) ao grupo de Tecnologia para Iniciantes de Programação!
 10) - Segurança da Informação: Princípios básicos de segurança cibernética e boas práticas para proteger aplicativos e dados.
 11) - Resolução de Problemas: Habilidades para analisar problemas complexos, dividindo-os em partes menores e aplicando soluções algorítmicas.
 12) - Testes e Depuração: Técnicas de teste e depuração de software para identificar e corrigir erros em programas.
+# Desafios para acomunidade:
+ - https://www.beecrowd.com.br/judge/en/problems/index/1

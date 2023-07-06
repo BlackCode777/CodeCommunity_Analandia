@@ -1,3 +1,33 @@
+
+
+
+*****************************************************************************************************
+*****************************************************************************************************
+***************************************************  DESAFIO ANALANDIA - 1  *****************************
+*****************************************************************************************************
+Desafio:
+https://www.beecrowd.com.br/judge/en/problems/view/1001
+
+Leia 2 variáveis, denominadas A e B e faça a soma dessas duas variáveis, 
+atribuindo seu resultado à variável X . Imprima X como mostrado abaixo. 
+Imprima a linha final após o resultado, caso contrário, você obterá 
+“ Erro de apresentação ”.
+
+Entrada
+O arquivo de entrada conterá 2 números inteiros.
+Entrada de Dados -->>   x = 10, y = 15   /   x = 133, y = 21   /   x = 11, y = 154
+
+Saída
+Imprima a letra X (maiúscula) com um espaço em branco antes e depois do 
+sinal de igual seguido do valor de X, conforme exemplo a seguir.
+Saída de Dados  -->>   resultado = 25   /   resultado = 154   /   resultado = 165
+
+
+Obs.: Se vocês já conhecem o conceito de entrada e saída de dados em um computador
+	já conseguem resolver este desafio de nível básico. Note que nos exemplos abaixo
+	temos  a entrada de dados e a saída de dados,  tentem resolver este problema usando 
+	o pseudo código que vcs aprenderam
+
 *****************************************************************************************************
 *****************************************************************************************************
 	CodeCommunity_Analandia / https://github.com/BlackCode777/CodeCommunity_Analandia.git

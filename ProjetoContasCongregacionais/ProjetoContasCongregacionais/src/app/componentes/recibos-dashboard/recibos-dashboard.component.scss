@@ -1,0 +1,14 @@
+.section-main {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  .card-main {
+    padding: 10px;
+  }
+  .card-form-search {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+  }
+}

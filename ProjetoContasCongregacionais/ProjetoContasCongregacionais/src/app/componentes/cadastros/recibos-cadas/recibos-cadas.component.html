@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<section>
+  <p-panel header="Cadastro de Recibos">
+    <form>
+      <div class="row">
+        <div class="col-md-2">
+          <p-inputText placeholder="Número do Recibo"></p-inputText>
+        </div>
+        <div class="col-md-2">
+          <p-calendar placeholder="Data do Recibo"></p-calendar>
+        </div>
+        <div class="col-md-4">
+          <p-inputText placeholder="Nome"></p-inputText>
+        </div>
+        <div class="col-md-4">
+          <p-inputText placeholder="Valor"></p-inputText>
+        </div>
+      </div>
+      <div class="row"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <p-button label="Salvar"></p-button>
+        </div>
+      </div>
+    </form>
+  </p-panel>
+  <p-panel header="Lista de Recibos">
+    <p-table>
+      <ng-template ptemplate="header">
+        <tr>
+          <th>Numero</th>
+          <th>Data</th>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Descrição</th>
+          <th>Opções</th>
+        </tr>
+      </ng-template>
+      <ng-template ptemplate="body" let-recibo>
+        <tr>
+          <td>{{ recibo.numeroRecibo }}</td>
+          <td>{{ recibo.dataRecibo }}</td>
+          <td>{{ recibo.nome }}</td>
+          <td>{{ recibo.valor }}</td>
+          <td>{{ recibo.descricao }}</td>
+          <td>
+            <!-- (click)="editarRecibo(recibo)"-->
+            <p-button label="Editar"></p-button>
+            <!-- (click)="excluirRecibo(recibo)"-->
+            <p-button label="Excluir"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+</section>

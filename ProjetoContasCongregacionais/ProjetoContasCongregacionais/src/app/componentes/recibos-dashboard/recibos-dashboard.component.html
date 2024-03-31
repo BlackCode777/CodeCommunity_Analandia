@@ -1,0 +1,52 @@
+<!--Usando a responsividade do bootstrap-->
+<section class="section-main">
+  <!--Criando 1 card-->
+  <div class="card card-main">
+    <div class="card-header">
+      <h4>Recibos do mês {{ "Fevereiro" }}</h4>
+    </div>
+
+    <!-- Criando o botão para tela de cadastro de recibos -->
+    <div class="card-body">
+      <button class="btn btn-primary" (click)="novoRecibo()">
+        Cadastrar novo recibo
+      </button>
+    </div>
+
+    <!-- Criar campo imput de pesquisa com botão ícone de pesquisa -->
+    <form class="card-form-search col-md-2">
+      <div class="card-body">
+        <label>Pesquisa de recibos por data</label>
+        <div class="input-group">
+          <input
+            type="date"
+            class="form-control"
+            placeholder="Pesquisar recibo"
+          />
+        </div>
+      </div>
+    </form>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="card col-md-3" style="background-color: rgb(187, 150, 245)">
+          <div
+            class="card-header"
+            style="display: flex; justify-content: space-between"
+          >
+            <h5>Recibo</h5>
+            <h6>Data {{ "01/02/2024" }}</h6>
+          </div>
+          <div class="card-body">
+            <p>Donativos para Obra Mundial: R$ {{ "250,00" }}</p>
+            <p>Donativo - Desp.Congregação local: R${{ "1200,00" }}</p>
+            <p>Tipo: {{ "Donativo" }} (Donativo/Pagamento/Adiantamento)</p>
+            <p>Arranjo de ônibus: R$ {{ "3500,00" }}</p>
+            <p>Valor total: R$ 4.950,00</p>
+            <div src="url"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

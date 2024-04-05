@@ -1,56 +1,104 @@
 <!DOCTYPE html>
-<section>
-  <p-panel header="Cadastro de Recibos">
-    <form>
-      <div class="row">
-        <div class="col-md-2">
-          <p-inputText placeholder="Número do Recibo"></p-inputText>
+<section class="section-form-main">
+  <h3>Cadastre aqui o recibo dos donativos coletados após a reunião</h3>
+  <div class="div-botao-cadas" *ngIf="novoRecibo">
+    <!--botão para submeter o formulario-->
+
+    <button class="btn btn-primary" (click)="enviarDadosEditadosDoRecibo()">
+      Recibo editado</button
+    >
+
+    <!-- <button class="btn btn-primary" (click)="enviarDadosEditadosDoRecibo()">Recibo editado</button> -->
+
+    <button class="btn btn-primary" (click)="cadastrarecibopost()">
+      Cadastrar novo recibo
+    </button>
+  </div>
+
+  <div class="div-form-card">
+    <form
+      class="card-form"
+      (ngSubmit)="cadastrarecibopost()"
+      #actorform="ngForm"
+    >
+      <div class="card-body">
+        <label>Cadastro de recibos</label>
+
+        <div>
+          <label for="mesReciboDashboard">Mês do recibo</label>
+          <input
+            type="month"
+            class="form-control"
+            placeholder="Mês do recibo"
+            [(ngModel)]="novoRecibo.mesReciboDashboard"
+            name="mesReciboDashboard"
+          />
         </div>
-        <div class="col-md-2">
-          <p-calendar placeholder="Data do Recibo"></p-calendar>
+
+        <div>
+          <label for="dataReciboDashboard">Data do recibo</label>
+          <input
+            type="date"
+            class="form-control"
+            placeholder="Data do recibo"
+            [(ngModel)]="novoRecibo.dataReciboDashboard"
+            name="dataReciboDashboard"
+          />
         </div>
-        <div class="col-md-4">
-          <p-inputText placeholder="Nome"></p-inputText>
+
+        <div>
+          <label for="donativoObraMundRecDashboard"
+            >Donativos para Obra Mundial</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Donativo para Obra Mundial"
+            [(ngModel)]="novoRecibo.donativoObraMundRecDashboard"
+            name="donativoObraMundRecDashboard"
+          />
         </div>
-        <div class="col-md-4">
-          <p-inputText placeholder="Valor"></p-inputText>
+
+        <div>
+          <label for="donativoDespCongrLocalRecDash"
+            >Donativo - Despesas da Congregação Local</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Donativo para Despesas da Congregação Local"
+            [(ngModel)]="novoRecibo.donativoDespCongrLocalRecDash"
+            name="donativoDespCongrLocalRecDash"
+          />
         </div>
-      </div>
-      <div class="row"></div>
-      <div class="row">
-        <div class="col-md-12">
-          <p-button label="Salvar"></p-button>
+
+        <!--Crie um dropdown para o campo "tipo de doação"-->
+        <div>
+          <label for="donativoTipo">Tipos de donativos</label>
+          <select
+            class="form-control"
+            [(ngModel)]="novoRecibo.donativoTipo"
+            name="donativoTipo"
+          >
+            <option value="1">Tipo de doação - click aqui para escolher</option>
+            <option value="Donativo">Donativo</option>
+            <option value="Pagamento">Pagamento</option>
+            <option value="Adiantamento">Adiantamento</option>
+            <option value="Arranjo">Arranjo de Ônibus</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="arranjoDeOnibus">Arranjo de ônibus</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Arranjo de ônibus"
+            [(ngModel)]="novoRecibo.arranjoDeOnibus"
+            name="arranjoDeOnibus"
+          />
         </div>
       </div>
     </form>
-  </p-panel>
-  <p-panel header="Lista de Recibos">
-    <p-table>
-      <ng-template ptemplate="header">
-        <tr>
-          <th>Numero</th>
-          <th>Data</th>
-          <th>Nome</th>
-          <th>Valor</th>
-          <th>Descrição</th>
-          <th>Opções</th>
-        </tr>
-      </ng-template>
-      <ng-template ptemplate="body" let-recibo>
-        <tr>
-          <td>{{ recibo.numeroRecibo }}</td>
-          <td>{{ recibo.dataRecibo }}</td>
-          <td>{{ recibo.nome }}</td>
-          <td>{{ recibo.valor }}</td>
-          <td>{{ recibo.descricao }}</td>
-          <td>
-            <!-- (click)="editarRecibo(recibo)"-->
-            <p-button label="Editar"></p-button>
-            <!-- (click)="excluirRecibo(recibo)"-->
-            <p-button label="Excluir"></p-button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </p-panel>
+  </div>
 </section>

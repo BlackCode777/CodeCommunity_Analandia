@@ -3,14 +3,16 @@
   <!--Criando 1 card-->
   <div class="card card-main">
     <div class="card-header">
-      <h4>Recibos do mês {{ "Fevereiro" }}</h4>
+      <h4>Dashboard de Recibos do mês {{ "Fevereiro" }}</h4>
     </div>
 
-    <!-- Criando o botão para tela de cadastro de recibos -->
-    <div class="card-body">
-      <button class="btn btn-primary" (click)="novoRecibo()">
-        Cadastrar novo recibo
-      </button>
+    <div class="botao-cadastro-recibo">
+      <!-- Criando o botão para tela de cadastro de recibos -->
+      <div class="card-body">
+        <button class="btn" (click)="novoRecibo()">
+          Cadastrar novo recibo
+        </button>
+      </div>
     </div>
 
     <!-- Criar campo imput de pesquisa com botão ícone de pesquisa -->
@@ -27,26 +29,50 @@
       </div>
     </form>
 
+    <!-- @for( recibo of listaRecibos; track recibo.idReciboDashboard ){ -->
     <div class="card-body">
+      <!--  *ngFor="let recibo of listaRecibos; let i = index" -->
+
       <div class="row">
-        <div class="card col-md-3" style="background-color: rgb(187, 150, 245)">
-          <div
-            class="card-header"
-            style="display: flex; justify-content: space-between"
-          >
-            <h5>Recibo</h5>
-            <h6>Data {{ "01/02/2024" }}</h6>
-          </div>
-          <div class="card-body">
-            <p>Donativos para Obra Mundial: R$ {{ "250,00" }}</p>
-            <p>Donativo - Desp.Congregação local: R${{ "1200,00" }}</p>
-            <p>Tipo: {{ "Donativo" }} (Donativo/Pagamento/Adiantamento)</p>
-            <p>Arranjo de ônibus: R$ {{ "3500,00" }}</p>
-            <p>Valor total: R$ 4.950,00</p>
-            <div src="url"></div>
-          </div>
-        </div>
+		@for ( item of listaRecibos; track item.id) {
+			<div class="card col-md-3">
+				<div
+				  class="card-header"
+				  style="
+					display: flex;
+					justify-content: space-between;
+					margin-top: 10px;
+				  "
+				>
+				  <h5>Recibo</h5>
+				  <h6>Data {{ item.dataReciboDashboard }}</h6>
+          <button class="btn btn-primary" (click)="editarReciboJaCadastrado(item)">Editar</button>
+          <button class="btn btn-danger" (click)="deletarReciboDashboard(item.id)">Deletar</button>
+            
+				</div>
+				<div class="card-body">
+				  <p>
+					Donativos para Obra Mundial: R$
+					{{ item.donativoObraMundRecDashboard }}
+				  </p>
+				  <p>
+					Donativo - Desp.Congregação local: R${{
+						item.donativoDespCongrLocalRecDash
+					}}
+				  </p>
+				  <p>
+					Tipo:
+					{{ item.donativoTipo }} (Donativo/Pagamento/Adiantamento)
+				  </p>
+				  <p>Arranjo de ônibus: R$ {{ item.arranjoDeOnibus }}</p>
+				  <!-- <p>Valor total: R$ {{4.950,00}}</p> -->
+				  <!-- <div src="url"></div> -->
+				</div>
+			  </div>
+		}          
+        
       </div>
     </div>
+    <!-- } -->
   </div>
 </section>

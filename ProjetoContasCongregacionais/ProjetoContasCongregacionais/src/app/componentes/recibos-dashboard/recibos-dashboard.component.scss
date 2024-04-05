@@ -4,11 +4,103 @@
   flex-direction: column;
 
   .card-main {
-    padding: 10px;
+    //padding: 10px;
+    .card-header{
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+      background: rgb(23, 16, 150);
+      background: radial-gradient(
+        circle,
+        rgb(32, 27, 126) 0%,
+        rgb(137, 19, 235) 83%
+      );
+      color: white;
+      .titulo {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      .botao-cadastro-recibo {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+
+        .card-body {
+          display: flex;
+          justify-content: flex-end;
+          flex-direction: row;
+          align-items: center;
+          .btn {
+            color: aliceblue;
+            background: rgb(23, 16, 150);
+            background: radial-gradient(
+              circle,
+              rgb(32, 27, 126) 0%,
+              rgb(137, 19, 235) 83%
+            );
+          }
+        }
+      }
+    }
+    .botao-cadastro-recibo{
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
+
+      .card-body {    
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        align-items: center;  
+        .btn {
+          color: aliceblue;
+          background: rgb(23, 16, 150);
+          background: radial-gradient(
+            circle,
+            rgb(32, 27, 126) 0%,
+            rgb(137, 19, 235) 83%
+          );
+        }
+      }
+    }
+    
   }
   .card-form-search {
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
+  }
+  .card-body {
+    .row {
+      .card {
+        margin-right: 1em;
+        margin-bottom: 1em;
+        background: rgb(23, 16, 150);
+        background: radial-gradient(
+          circle,
+          rgb(32, 27, 126) 0%,
+          rgb(137, 19, 235) 83%
+        );
+        width: 470px;
+        color: white;
+        // height: 250px;
+        .card-header {
+        }
+        .card-body {
+          color: rgb(22, 5, 66);
+          border-radius: 5px;
+          background: rgb(2, 0, 36);
+          background: linear-gradient(
+            180deg,
+            rgb(255, 255, 255) 54%,
+            rgb(255, 255, 255) 83%
+          );
+          padding: 5px;
+          margin-bottom: 5px;
+          height: 200px;
+        }
+      }
+    }
   }
 }

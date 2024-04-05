@@ -1,0 +1,49 @@
+{
+  "recibosDashboard": [
+    {
+      "id": 1,
+      "mesReciboDashboard": "Janeiro",
+      "dataReciboDashboard": "2024-01-15",
+      "donativoObraMundRecDashboard": 500,
+      "donativoDespCongrLocalRecDash": 300,
+      "donativoTipo": "Regular",
+      "arranjoDeOnibus": 200
+    },
+    {
+      "id": 2,
+      "mesReciboDashboard": "Fevereiro",
+      "dataReciboDashboard": "2024-02-14",
+      "donativoObraMundRecDashboard": 5500,
+      "donativoDespCongrLocalRecDash": 3200,
+      "donativoTipo": "Especial",
+      "arranjoDeOnibus": 2500
+    },
+    {
+      "id": 3,
+      "mesReciboDashboard": "Março",
+      "dataReciboDashboard": "2024-03-20",
+      "donativoObraMundRecDashboard": 600,
+      "donativoDespCongrLocalRecDash": 350,
+      "donativoTipo": "Regular",
+      "arranjoDeOnibus": 300
+    },
+    {
+      "id": 11,
+      "mesReciboDashboard": "2024-01",
+      "dataReciboDashboard": "2024-04-03",
+      "donativoObraMundRecDashboard": 200,
+      "donativoDespCongrLocalRecDash": 3000,
+      "donativoTipo": "Donativo",
+      "arranjoDeOnibus": 200
+    },
+    {
+      "id": 13,
+      "mesReciboDashboard": "2024-03",
+      "dataReciboDashboard": "2024-04-03",
+      "donativoObraMundRecDashboard": 15400,
+      "donativoDespCongrLocalRecDash": 1500,
+      "donativoTipo": "Pagamento",
+      "arranjoDeOnibus": 580
+    }
+  ]
+}

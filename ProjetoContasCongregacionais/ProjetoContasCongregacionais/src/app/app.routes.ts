@@ -3,14 +3,27 @@ import { RecibosCadasComponent } from './componentes/cadastros/recibos-cadas/rec
 import { RecibosDashboardComponent } from './componentes/recibos-dashboard/recibos-dashboard.component';
 
 export const routes: Routes = [
-  // rotas
+  // primeira rotas de acesso na aplicação full
+  {
+    path: '',
+    redirectTo: 'dashboardRecibos',
+    pathMatch: 'full',
+  },
+
   {
     path: 'dashboardRecibos',
     component: RecibosDashboardComponent,
   },
 
   {
-    path: 'novoRecibo',
+    path: 'cadasRecibo',
     component: RecibosCadasComponent,
   },
+
+  // Vou criar uma rota para editar o recibo
+  {
+    path: 'editarRecibo/:id',
+    component: RecibosCadasComponent,
+  }
+
 ];

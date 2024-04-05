@@ -1,0 +1,54 @@
+.section-form-main {
+    width: 100%;
+    height: 100vh;
+  padding: 30px;
+  background: rgb(159, 197, 241);
+      background: radial-gradient(
+        circle,
+        rgb(246, 245, 255) 0%,
+        rgb(210, 206, 212) 83%
+      );
+    
+  .div-botao-cadas {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    .btn {
+      background: rgb(23, 16, 150);
+      background: radial-gradient(
+        circle,
+        rgb(32, 27, 126) 0%,
+        rgb(137, 19, 235) 83%
+      );
+    }
+  }
+
+  .div-form-card{
+    width: 100%;
+    background: rgb(23, 16, 150);
+    background: radial-gradient(
+      circle,
+      rgb(32, 27, 126) 0%,
+      rgb(137, 19, 235) 83%
+    );
+    .card-form{      
+      width: 50%;
+      padding: 20px;
+      border-radius: 10px;
+      
+      .card-body{
+        
+          label{
+              color: white;
+              font-size: 30px;
+              font: 700;
+          }
+          .input-group{
+            display: flex;
+          }
+      }
+    }
+  }  
+
+}

@@ -3,99 +3,94 @@ package com.blackcode.projetocontascongregacionaisbackend.model;
 
 import java.util.Date;
 
-public class ReciboDashboardClasse {
-    /*
-     * idReciboDashboard: number;
-     * mesReciboDashboard: string; //<h4>Recibos do mês {{ "Fevereiro" }}</h4>
-     * dataReciboDashboard: string; //<h6>Data {{ "01/02/2024" }}</h6>
-     * donativoObraMundRecDashboard: number; //<p>Donativos para Obra Mundial: R$ {{
-     * "250,00" }}</p>
-     * donativoDespCongrLocalRecDash: number; //<p>Donativo - Desp.Congregação
-     * local: R${{ "1200,00" }}</p>
-     * donativoTipo: string; //<p>Tipo: {{ "Donativo" }}</p>
-     * arranjoDeOnibus: number; //<p>Arranjo de ônibus: R$ {{ "3500,00" }}</p>
-     */
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.AccessType;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-    private Long idReciboDashboard;
-    private String mesReciboDashboard;
-    private String dataReciboDashboard;
+@AccessType(AccessType.Type.PROPERTY)
+@Document(collection = "recibos-dashboard")
+public class ReciboDashboardClasse {
+
+    @MongoId(FieldType.OBJECT_ID)
+    private ObjectId idReciboDashboard;
+
+    @Indexed
+    private Date mesReciboDashboard;
+
+    @Indexed
+    private Date dataReciboDashboard;
+
+    @Indexed
     private Float donativoObraMundRecDashboard;
+
+    @Indexed
     private Float donativoDespCongrLocalRecDash;
+
+    @Indexed
     private Float arranjoDeOnibus;
+
+    @Indexed
+    @Field(targetType = FieldType.STRING)
     private String donativoTipo;
 
-    public void constructor() {
-    }
-
-    public void constructor(Long idReciboDashboard, String mesReciboDashboard, String dataReciboDashboard,
+    public void constructor(
+            ObjectId idReciboDashboard, Date mesReciboDashboard, Date dataReciboDashboard,
             Float donativoObraMundRecDashboard, Float donativoDespCongrLocalRecDash, Float arranjoDeOnibus,
             String donativoTipo) {
         this.idReciboDashboard = idReciboDashboard;
         this.mesReciboDashboard = mesReciboDashboard;
         this.dataReciboDashboard = dataReciboDashboard;
         this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
-        this.donativoDespCongrLocalRecDash = donativoDespCongrLocalRecDash; // Aqui tenho provavelmente tenho um Array
-                                                                            // de objetos de outra classe
-                                                                            // DespesasCongrLocal[luz/aqua/resolucoes/internet/]
+        this.donativoDespCongrLocalRecDash = donativoDespCongrLocalRecDash;
         this.arranjoDeOnibus = arranjoDeOnibus;
         this.donativoTipo = donativoTipo;
     }
 
     // Criar métodos para soma dos valores this.donativoObraMundRecDashboard /
     // this.donativoDespCongrLocalRecDash / this.arranjoDeOnibus
-
-    /**
-     * @return Long return the idReciboDashboard
-     */
-    public Long getIdReciboDashboard() {
-        return idReciboDashboard;
+    public void constructor(Float donativoObraMundRecDashboard, Float donativoDespCongrLocalRecDash,
+            Float arranjoDeOnibus) {
+        this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
+        this.donativoDespCongrLocalRecDash = donativoDespCongrLocalRecDash;
+        this.arranjoDeOnibus = arranjoDeOnibus;
     }
 
     /**
-     * @param idReciboDashboard the idReciboDashboard to set
+     * create method for sum of values of according to the with same month
      */
-    public void setIdReciboDashboard(Long idReciboDashboard) {
-        this.idReciboDashboard = idReciboDashboard;
+    public <T> T valuesAccordingToTheMonth(Date month, Long id, Class<T> type) {
+        String message = "The month not is the same of the month and id not is equal to id";
+        if (this.mesReciboDashboard.equals(month) && this.idReciboDashboard.equals(id)) {
+            Float sum = this.donativoObraMundRecDashboard + this.donativoDespCongrLocalRecDash + this.arranjoDeOnibus;
+            if (type.isAssignableFrom(Float.class)) {
+                return type.cast(sum);
+            } else {
+                throw new IllegalArgumentException("The type is not supported " + type.getName());
+            }
+        } else {
+            System.out.println(message);
+        }
+        return null;
     }
 
     /**
      * @return String return the mesReciboDashboard
      */
-    public String getMesReciboDashboard() {
+    public Date getMesReciboDashboard() {
         return mesReciboDashboard;
     }
 
     /**
      * @param mesReciboDashboard the mesReciboDashboard to set
      */
-    public void setMesReciboDashboard(String mesReciboDashboard) {
+    public void setMesReciboDashboard(Date mesReciboDashboard) {
         this.mesReciboDashboard = mesReciboDashboard;
     }
 
-    /**
-     * @return String return the dataReciboDashboard
-     */
-    public String getDataReciboDashboard() {
-        return dataReciboDashboard;
-    }
-
-    /**
-     * @param dataReciboDashboard the dataReciboDashboard to set
-     */
-    public void setDataReciboDashboard(String dataReciboDashboard) {
-        this.dataReciboDashboard = dataReciboDashboard;
-    }
-
-    /**
-     * @return Float return the donativoObraMundRecDashboard
-     */
-    public Float getDonativoObraMundRecDashboard() {
-        return donativoObraMundRecDashboard;
-    }
-
-    /**
-     * @param donativoObraMundRecDashboard the donativoObraMundRecDashboard to set
-     */
     public void setDonativoObraMundRecDashboard(Float donativoObraMundRecDashboard) {
         this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
     }
@@ -140,6 +135,14 @@ public class ReciboDashboardClasse {
      */
     public void setDonativoTipo(String donativoTipo) {
         this.donativoTipo = donativoTipo;
+    }
+
+    // toString method
+    @Override
+    public String toString() {
+        return "ReciboDashboardClasse [arranjoDeOnibus=" + arranjoDeOnibus + ", dataReciboDashboard="
+                + dataReciboDashboard + ", donativoDespCongrLocalRecDash=" + donativoDespCongrLocalRecDash
+                + ", donativoObraMundRecDashboard=" + donativoObraMundRecDashboard + ", donativoTipo=" + donativoTipo;
     }
 
 }

@@ -44,6 +44,15 @@
       "donativoDespCongrLocalRecDash": 1500,
       "donativoTipo": "Pagamento",
       "arranjoDeOnibus": 580
+    },
+    {
+      "id": 14,
+      "mesReciboDashboard": "2023-01",
+      "dataReciboDashboard": "2023-01-05",
+      "donativoObraMundRecDashboard": 522,
+      "donativoDespCongrLocalRecDash": 200,
+      "donativoTipo": "Pagamento",
+      "arranjoDeOnibus": 150
     }
   ]
 }

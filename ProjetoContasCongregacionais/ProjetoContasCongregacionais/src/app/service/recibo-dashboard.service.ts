@@ -16,7 +16,18 @@ export class ReciboDashboardService {
 
   // Headers
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredentials: true,
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+  }
+  
+  // criação método getRecibosDashboard para bucar todos os reccibos
+  apiRecibosMongo = "localhost:8080/getRecibosDashboard";
+  getRecibosDashboard(): Observable<RecibosDashboardClasse[]>{
+    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions);
+    // return this.http.get<RecibosDashboardClasse[]>(this.getRecibosAPI);
   }
 
   // criação de método put para atualizar recibos
@@ -51,11 +62,6 @@ export class ReciboDashboardService {
       retry(2),
       catchError(this.handleError)
     );      
-  }
-
-  // criação método getRecibosDashboard para bucar todos os reccibos
-  getRecibosDashboard(): Observable<RecibosDashboardClasse[]>{
-    return this.http.get<RecibosDashboardClasse[]>(this.getRecibosAPI);
   }
 
   handleError(error: HttpErrorResponse) {
@@ -154,7 +160,7 @@ has been blocked by CORS policy: Response to preflight request doesn't pass acce
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true
   }
-  
+
 
 
   */

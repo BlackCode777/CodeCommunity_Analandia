@@ -77,12 +77,16 @@ export class RecibosDashboardComponent {
 
   getRecibosDashboard(){
     // Buscando todos os recibos para lista
-    this.Recibo.getRecibosDashboard().subscribe((recibo: RecibosDashboardClasse[]) => {
+    this.Recibo.getRecibosDashboard().subscribe((recibo: RecibosDashboardClasse[] ) => {
       console.log(recibo);
 
-      //Usar assert para validaar os dados
-      console.assert(recibo, 'Recibo não pode ser nulo');
-      this.listaRecibos = recibo;
+      // this variable is for convert array for object
+      //let reciboObj1 = Object.assign({}, recibo);
+
+      // this variable is for convert object for array
+      let reciboObj = Object.values(recibo);
+      
+      this.listaRecibos = reciboObj;
     });
   }
 

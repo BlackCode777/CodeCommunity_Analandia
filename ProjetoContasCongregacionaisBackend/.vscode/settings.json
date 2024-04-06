@@ -18,5 +18,8 @@
         "titleBar.inactiveBackground": "#06bd0099",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#06bd00"
+    "peacock.color": "#06bd00",
+    "cSpell.words": [
+        "Tipo"
+    ]
 }

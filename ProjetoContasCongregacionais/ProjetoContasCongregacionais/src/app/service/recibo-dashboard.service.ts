@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { RecibosDashboardClasse } from '../model/RecibosDashboardClasse';
@@ -14,19 +14,21 @@ export class ReciboDashboardService {
 
   private getRecibosAPI = 'http://localhost:3000/recibosDashboard'
 
-  // Headers
+  /*
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    withCredentials: true,
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    // withCredentials: true,
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    // 'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
   }
+  */
+  
   
   // criação método getRecibosDashboard para bucar todos os reccibos
   apiRecibosMongo = "localhost:8080/getRecibosDashboard";
   getRecibosDashboard(): Observable<RecibosDashboardClasse[]>{
-    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions);
+    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo); //, this.httpOptions
     // return this.http.get<RecibosDashboardClasse[]>(this.getRecibosAPI);
   }
 
@@ -36,7 +38,7 @@ export class ReciboDashboardService {
   }
 
   updateReciboJaCadastrado(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {
-    return this.http.put<RecibosDashboardClasse>(this.getRecibosAPI + '/' + recibo.id, JSON.stringify(recibo), this.httpOptions)
+    return this.http.put<RecibosDashboardClasse>(this.getRecibosAPI + '/' + recibo.id, JSON.stringify(recibo)) //, this.httpOptions
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -57,7 +59,7 @@ export class ReciboDashboardService {
   // OBS - O método post é utilizado para salvar um novo registro e os dados são enviados no corpo da requisição
   // é obrigatório enviar o objeto que será salvo e de forma alguma mandar um Array de objetos
   cadastraReciboPost(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {    
-    return this.http.post<RecibosDashboardClasse>(this.getRecibosAPI, JSON.stringify(recibo), this.httpOptions)
+    return this.http.post<RecibosDashboardClasse>(this.getRecibosAPI, JSON.stringify(recibo)) //, this.httpOptions
     .pipe(
       retry(2),
       catchError(this.handleError)

@@ -33,7 +33,5 @@ import { ReciboDashboardService } from './service/recibo-dashboard.service';
 export class AppComponent {
   title = 'ProjetoContasCongregacionais';
 }
-function withFetch(): import("@angular/common/http").HttpFeature<import("@angular/common/http").HttpFeatureKind> {
-  throw new Error('Function not implemented.');
-}
+
 

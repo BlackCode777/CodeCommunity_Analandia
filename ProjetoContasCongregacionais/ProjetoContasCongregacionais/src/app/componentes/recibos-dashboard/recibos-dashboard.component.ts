@@ -54,14 +54,19 @@ export class RecibosDashboardComponent {
 
   editarReciboJaCadastrado(recibo: RecibosDashboardClasse) {
     console.log('Atualizar recibo');
-    this.Recibo.updateReciboJaCadastrado(recibo).subscribe(() => { // Fix: Pass the entire 'recibo' object
+
+    this.Recibo.updateReciboJaCadastrado(recibo).subscribe(() => { 
+
       console.log('Recibo atualizado com sucesso');
+
       this.getRecibosDashboard();
-      // vou redirecionar o usuario para tela de cadastro com o id do recibo e os dados preenchidos
+
       this.router.navigate(['editarRecibo', recibo.id]);
     },
-    (err: any) => { // Fix: Added the error parameter
+    (err: any) => { 
+
       console.error('Error updating recibo: ', err);
+
     });
     
   }

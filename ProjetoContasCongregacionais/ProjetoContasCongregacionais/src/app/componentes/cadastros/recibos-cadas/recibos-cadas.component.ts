@@ -74,8 +74,6 @@ export class RecibosCadasComponent {
   toHideButtonEditReceipt: boolean = false;
 
   ngOnInit() {
-    // Cadastra um novo recibo
-    //this.cadastrarecibopost();
     const id = this.route.snapshot.params['id']; // Fix: Acessando propriedade 'id' usando colchetes
     this.buscarDadosDoRecibo(id);
   }

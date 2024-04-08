@@ -24,7 +24,7 @@ export class ReciboDashboardService {
   // criação método getRecibosDashboard para bucar todos os reccibos
   apiRecibosMongo = "localhost:8080/getRecibosDashboard";
   getRecibosDashboard(): Observable<RecibosDashboardClasse[]>{
-    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo); //, this.httpOptions
+    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions); //, this.httpOptions
     // return this.http.get<RecibosDashboardClasse[]>(this.getRecibosAPI);
   }
 

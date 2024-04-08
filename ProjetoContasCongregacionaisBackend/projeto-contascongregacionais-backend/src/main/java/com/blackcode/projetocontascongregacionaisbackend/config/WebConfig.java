@@ -2,8 +2,6 @@ package com.blackcode.projetocontascongregacionaisbackend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -11,20 +9,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig {
 
     @Bean
-    public WebMvcConfigurer corsConfig() {
+    public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                // WebMvcConfigurer.super.addCorsMappings(registry);
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
-                        .allowedMethods(
-                                HttpMethod.GET.name(),
-                                HttpMethod.POST.name(),
-                                HttpMethod.PUT.name(),
-                                HttpMethod.DELETE.name())
-                        .allowedHeaders(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE);
-
+                registry.addMapping("/**") // Aplica as configurações CORS para todas as rotas
+                        .allowedOrigins("*") // Permite todas as origens
+                        .allowedMethods("*") // Permite todos os métodos HTTP
+                        .allowedHeaders("*") // Permite todos os cabeçalhos
+                        .exposedHeaders("*") // Expõe todos os cabeçalhos na resposta
+                        .allowCredentials(true).maxAge(3600); // Permite credenciais e define um tempo máximo de cache
             }
         };
     }

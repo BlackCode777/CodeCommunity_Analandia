@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RecibosCadasComponent } from './componentes/cadastros/recibos-cadas/recibos-cadas.component';
 import { RecibosDashboardComponent } from './componentes/recibos-dashboard/recibos-dashboard.component';
+import { ReciboDashboardService } from './service/recibo-dashboard.service';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,13 @@ import { RecibosDashboardComponent } from './componentes/recibos-dashboard/recib
     ButtonModule,
     RippleModule,
 
+    //provideHttpClient(withFetch()),
+
     // Importando os componentes
     RecibosCadasComponent,
     RecibosDashboardComponent,
   ],
+  providers: [ReciboDashboardService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -29,3 +33,7 @@ import { RecibosDashboardComponent } from './componentes/recibos-dashboard/recib
 export class AppComponent {
   title = 'ProjetoContasCongregacionais';
 }
+function withFetch(): import("@angular/common/http").HttpFeature<import("@angular/common/http").HttpFeatureKind> {
+  throw new Error('Function not implemented.');
+}
+

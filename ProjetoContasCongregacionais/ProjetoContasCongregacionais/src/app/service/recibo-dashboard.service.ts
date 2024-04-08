@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { RecibosDashboardClasse } from '../model/RecibosDashboardClasse';
@@ -14,15 +14,11 @@ export class ReciboDashboardService {
 
   private getRecibosAPI = 'http://localhost:3000/recibosDashboard'
 
-  /*
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    // withCredentials: true,
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    // 'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+    withCredentials: true
   }
-  */
   
   
   // criação método getRecibosDashboard para bucar todos os reccibos
@@ -34,7 +30,7 @@ export class ReciboDashboardService {
 
   // criação de método put para atualizar recibos
   getRecibosPorId(id: Number): Observable<RecibosDashboardClasse> {
-    return this.http.get<RecibosDashboardClasse>(this.getRecibosAPI + '/' + id);
+    return this.http.get<RecibosDashboardClasse>(this.getRecibosAPI + '/' + id, this.httpOptions);
   }
 
   updateReciboJaCadastrado(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {
@@ -47,13 +43,13 @@ export class ReciboDashboardService {
 
   // criar para deletar recibos
   deleteRecibo(id: Number): Observable<RecibosDashboardClasse>{
-    return this.http.delete<RecibosDashboardClasse>(this.getRecibosAPI + '/' + id, { responseType: 'json' });
+    return this.http.delete<RecibosDashboardClasse>(this.getRecibosAPI + '/' + id, this.httpOptions);
   }
 
-  // Criar método para fazer consulta por dataReciboDashboard
-  getRecibosPorData(data: string): Observable<RecibosDashboardClasse[]> {
-    return this.http.get<RecibosDashboardClasse[]>(this.getRecibosAPI + '?data=' + data);
-  }
+  // // Criar método para fazer consulta por dataReciboDashboard
+  // getRecibosPorData(data: string): Observable<RecibosDashboardClasse[]> {
+  //   return this.http.get<RecibosDashboardClasse[]>(this.getRecibosAPI + '?data=' + data);
+  // }
 
   // criação de método post para salvar recibos
   // OBS - O método post é utilizado para salvar um novo registro e os dados são enviados no corpo da requisição

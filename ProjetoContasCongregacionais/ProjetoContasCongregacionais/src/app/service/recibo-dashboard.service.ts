@@ -51,9 +51,7 @@ export class ReciboDashboardService {
   //   return this.http.get<RecibosDashboardClasse[]>(this.getRecibosAPI + '?data=' + data);
   // }
 
-  // criação de método post para salvar recibos
-  // OBS - O método post é utilizado para salvar um novo registro e os dados são enviados no corpo da requisição
-  // é obrigatório enviar o objeto que será salvo e de forma alguma mandar um Array de objetos
+  
   cadastraReciboPost(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {    
     return this.http.post<RecibosDashboardClasse>(this.getRecibosAPI, JSON.stringify(recibo)) //, this.httpOptions
     .pipe(

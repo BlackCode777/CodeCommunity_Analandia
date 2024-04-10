@@ -78,6 +78,9 @@ export class RecibosCadasComponent {
     this.buscarDadosDoRecibo(id);
   }
 
+
+
+
   // Método para enviar os dados editados do recibo
   enviarDadosEditadosDoRecibo() {
     // implementation of the method
@@ -91,6 +94,11 @@ export class RecibosCadasComponent {
       });
   }
 
+
+
+
+
+  
   // Método para buscar os dados do recibo e popular os campos do formulário
   buscarDadosDoRecibo(id: number) {
     this.popularCamposComDadosDoRecibo(id);

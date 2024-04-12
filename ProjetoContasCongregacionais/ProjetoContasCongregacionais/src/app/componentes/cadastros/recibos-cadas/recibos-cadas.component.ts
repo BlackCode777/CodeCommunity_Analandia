@@ -78,9 +78,6 @@ export class RecibosCadasComponent {
     this.buscarDadosDoRecibo(id);
   }
 
-
-
-
   // Método para enviar os dados editados do recibo
   enviarDadosEditadosDoRecibo() {
     // implementation of the method

@@ -2,13 +2,10 @@
   <h3>Cadastre aqui o recibo dos donativos coletados após a reunião</h3>
   <div class="div-botao-cadas" *ngIf="novoRecibo">
     <!--botão para submeter o formulario-->
-
-    <button class="btn btn-primary" (click)="enviarDadosEditadosDoRecibo()">
-      Recibo editado</button
-    >
-
-    <!-- <button class="btn btn-primary" (click)="enviarDadosEditadosDoRecibo()">Recibo editado</button> -->
-
+    <button class="btn btn-primary" 
+    
+    (click)="enviarDadosEditadosDoRecibo()">    
+      Recibo editado</button>
     <button class="btn btn-primary" (click)="cadastrarecibopost()">
       Cadastrar novo recibo
     </button>
@@ -18,8 +15,8 @@
     <form
       class="card-form"
       (ngSubmit)="cadastrarecibopost()"
-      #actorform="ngForm"
-    >
+      #actorform="ngForm">
+
       <div class="card-body">
         <label>Cadastro de recibos</label>
 

@@ -8,6 +8,7 @@ public class ProjetoContascongregacionaisBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoContascongregacionaisBackendApplication.class, args);
+
 	}
 
 }

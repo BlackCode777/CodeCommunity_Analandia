@@ -93,11 +93,6 @@ export class RecibosCadasComponent {
         this.resetForm(); // chamada do método resetForm
       });
   }
-
-
-
-
-
   
   // Método para buscar os dados do recibo e popular os campos do formulário
   buscarDadosDoRecibo(id: number) {

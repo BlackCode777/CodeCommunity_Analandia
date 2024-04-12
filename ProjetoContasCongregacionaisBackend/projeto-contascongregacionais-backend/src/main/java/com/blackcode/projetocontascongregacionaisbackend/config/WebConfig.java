@@ -14,8 +14,8 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Aplica as configurações CORS para todas as rotas
-                        .allowedOrigins("*") // Permite todas as origens
-                        .allowedMethods("*") // Permite todos os métodos HTTP
+                        .allowedOrigins("http://localhost:4200") // Permite todas as origens
+                        .allowedMethods("POST", "GET", "PUT", "DELETE") // Permite todos os métodos HTTP
                         .allowedHeaders("*") // Permite todos os cabeçalhos
                         .exposedHeaders("*") // Expõe todos os cabeçalhos na resposta
                         .allowCredentials(true).maxAge(3600); // Permite credenciais e define um tempo máximo de cache

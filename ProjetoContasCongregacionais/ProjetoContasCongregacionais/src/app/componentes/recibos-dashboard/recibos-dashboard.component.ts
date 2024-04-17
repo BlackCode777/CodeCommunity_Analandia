@@ -54,25 +54,17 @@ export class RecibosDashboardComponent {
 
   editarReciboJaCadastrado(recibo: RecibosDashboardClasse) {
     console.log('Atualizar recibo');
-
     this.Recibo.updateReciboJaCadastrado(recibo).subscribe(() => { 
-
       console.log('Recibo atualizado com sucesso');
-
       this.getRecibosDashboard();
-
-      this.router.navigate(['editarRecibo', recibo.id]);
-    },
+      this.router.navigate(['editarRecibo', recibo._id]);    },
     (err: any) => { 
-
       console.error('Error updating recibo: ', err);
-
-    });
-    
+    });    
   }
 
   // Método para deletar recibo por id
-  deletarReciboDashboard(id: Number) {
+  deletarReciboDashboard(id: string) {
     console.log('Deletar recibo');
     this.Recibo.deleteRecibo(id).subscribe(() => {
       console.log('Recibo deletado com sucesso');
@@ -81,18 +73,12 @@ export class RecibosDashboardComponent {
   }
 
   getRecibosDashboard(){
-    // Buscando todos os recibos para lista
     this.Recibo.getRecibosDashboard().subscribe((recibo: RecibosDashboardClasse[] ) => {
       console.log(recibo);
-
-      // this variable is for convert array for object
-      //let reciboObj1 = Object.assign({}, recibo);
-
-      // this variable is for convert object for array
-      let reciboObj = Object.values(recibo);
-      
+      let reciboObj = Object.values(recibo);      
       this.listaRecibos = reciboObj;
-    });
+    })
+  
   }
 
   novoRecibo() {

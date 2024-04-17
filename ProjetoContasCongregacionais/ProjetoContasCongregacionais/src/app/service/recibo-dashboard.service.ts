@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+import { catchError, map, Observable, retry, throwError } from 'rxjs';
 import { RecibosDashboardClasse } from '../model/RecibosDashboardClasse';
 
 @Injectable({
@@ -23,17 +23,18 @@ export class ReciboDashboardService {
   // criação método getRecibosDashboard para bucar todos os reccibos
   apiRecibosMongo = " http://localhost:8080/recibos/getRecibosDashboard";
 
+  
   getRecibosDashboard(): Observable<RecibosDashboardClasse[]>{
-    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions); 
+    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions)    
   }
 
   // criação de método put para atualizar recibos
-  getRecibosPorId(id: Number): Observable<RecibosDashboardClasse> {
+  getRecibosPorId(id: any): Observable<RecibosDashboardClasse> {
     return this.http.get<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + id, this.httpOptions);
   }
 
   updateReciboJaCadastrado(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {
-    return this.http.put<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + recibo.id, JSON.stringify(recibo)) //, this.httpOptions
+    return this.http.put<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + recibo._id, JSON.stringify(recibo)) //, this.httpOptions
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -41,7 +42,7 @@ export class ReciboDashboardService {
   }
 
   // criar para deletar recibos
-  deleteRecibo(id: Number): Observable<RecibosDashboardClasse>{
+  deleteRecibo(id: string): Observable<RecibosDashboardClasse>{
     return this.http.delete<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + id, this.httpOptions);
   }
   

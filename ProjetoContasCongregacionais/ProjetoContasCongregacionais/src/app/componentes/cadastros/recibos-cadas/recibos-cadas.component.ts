@@ -62,7 +62,7 @@ export class RecibosCadasComponent {
 
   // Supondo que você tenha um formulário vinculado a este modelo
   novoRecibo: RecibosDashboardClasse = {
-    id: 0,
+    _id: '',
     mesReciboDashboard: '',
     dataReciboDashboard: '',
     donativoObraMundRecDashboard: 0,
@@ -119,7 +119,7 @@ export class RecibosCadasComponent {
   resetForm() {
     // Implemente a lógica para resetar seu formulário aqui
     this.novoRecibo = {
-      id: 0,
+      _id: '',
       mesReciboDashboard: '',
       dataReciboDashboard: '',
       donativoObraMundRecDashboard: 0,

@@ -16,10 +16,10 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 public class ReciboDashboardClasse {
 
     @MongoId(FieldType.OBJECT_ID)
-    private ObjectId idReciboDashboard;
+    private ObjectId id;
 
     @Indexed
-    private Date mesReciboDashboard;
+    private String mesReciboDashboard;
 
     @Indexed
     private Date dataReciboDashboard;
@@ -38,10 +38,11 @@ public class ReciboDashboardClasse {
     private String donativoTipo;
 
     public void constructor(
-            ObjectId idReciboDashboard, Date mesReciboDashboard, Date dataReciboDashboard,
+            ObjectId id,
+            String mesReciboDashboard, Date dataReciboDashboard,
             Float donativoObraMundRecDashboard, Float donativoDespCongrLocalRecDash, Float arranjoDeOnibus,
             String donativoTipo) {
-        this.idReciboDashboard = idReciboDashboard;
+        this.id = id;
         this.mesReciboDashboard = mesReciboDashboard;
         this.dataReciboDashboard = dataReciboDashboard;
         this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
@@ -64,7 +65,7 @@ public class ReciboDashboardClasse {
      */
     public <T> T valuesAccordingToTheMonth(Date month, Long id, Class<T> type) {
         String message = "The month not is the same of the month and id not is equal to id";
-        if (this.mesReciboDashboard.equals(month) && this.idReciboDashboard.equals(id)) {
+        if (this.mesReciboDashboard.equals(month) && this.id.equals(id)) {
             Float sum = this.donativoObraMundRecDashboard + this.donativoDespCongrLocalRecDash + this.arranjoDeOnibus;
             if (type.isAssignableFrom(Float.class)) {
                 return type.cast(sum);
@@ -80,14 +81,14 @@ public class ReciboDashboardClasse {
     /**
      * @return String return the mesReciboDashboard
      */
-    public Date getMesReciboDashboard() {
+    public String getMesReciboDashboard() {
         return mesReciboDashboard;
     }
 
     /**
      * @param mesReciboDashboard the mesReciboDashboard to set
      */
-    public void setMesReciboDashboard(Date mesReciboDashboard) {
+    public void setMesReciboDashboard(String mesReciboDashboard) {
         this.mesReciboDashboard = mesReciboDashboard;
     }
 

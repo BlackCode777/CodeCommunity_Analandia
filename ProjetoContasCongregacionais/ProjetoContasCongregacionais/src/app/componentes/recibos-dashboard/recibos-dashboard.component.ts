@@ -37,7 +37,7 @@ import { RecibosCadasComponent } from '../cadastros/recibos-cadas/recibos-cadas.
 })
 export class RecibosDashboardComponent {
   constructor(private router: Router, 
-    private route: ActivatedRoute, 
+    private routeActivated: ActivatedRoute, 
     private Recibo: ReciboDashboardService) {}
 
   // json-server --watch db.json
@@ -50,6 +50,27 @@ export class RecibosDashboardComponent {
   ngOnInit() {
     // Buscando todos os recibos para lista
     this.getRecibosDashboard();
+      //this.routeActivated.queryParams.pipe()
+      this.routeActivated.queryParams.subscribe(params => {
+          let id = params["id"];
+          if(id !== null && id !== undefined && id.lenght > 0){
+              this.Recibo.getRecibosDashboard().pipe()
+              .subscribe((response) => {
+                  this.listaRecibos = response;
+                  let i = 0;
+                  this.listaRecibos.forEach(element => {
+                      i++; 
+                      if (element._id === id) {
+                        this.editarReciboJaCadastrado(element);
+                      }
+                      if (i === this.listaRecibos.length) {
+                        this.router.navigate(['cadasRecibo']);
+                      }
+                  })
+              })
+          }
+      })
+
   }
 
   editarReciboJaCadastrado(recibo: RecibosDashboardClasse) {

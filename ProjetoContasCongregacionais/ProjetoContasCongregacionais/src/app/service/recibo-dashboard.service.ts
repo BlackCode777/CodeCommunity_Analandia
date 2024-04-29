@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, retry, throwError } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 import { RecibosDashboardClasse } from '../model/RecibosDashboardClasse';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class ReciboDashboardService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true
+    /* Ajustar tratamento dos dados */
   }
   
   // criação método getRecibosDashboard para bucar todos os reccibos

@@ -20,7 +20,7 @@ import com.blackcode.projetocontascongregacionaisbackend.model.ReciboDashboardCl
 import com.blackcode.projetocontascongregacionaisbackend.services.ReciboDashboardService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/recibos")
 public class RecibosDashboardAPI {
 
@@ -34,6 +34,9 @@ public class RecibosDashboardAPI {
         JSONObject mensagemJson = new JSONObject();
         try {
             List<ReciboDashboardClasse> recibo = reciboService.findAll();
+
+            System.out.println("Recibo _############_ : " + recibo);
+
             if (recibo.isEmpty()) {
                 mensagemJson.put("message", "Nenhum recibo encontrado.");
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(mensagemJson.toString());
@@ -57,3 +60,14 @@ public class RecibosDashboardAPI {
     // }
 
 }
+
+/*
+ * PREPARAÇÂO PARA ESTUDAR MELHOR
+ * 
+ * 1) - entrar no clima do estudo - ler alguma coisa que inspire
+ * 2) - estudo focado profundo - 90 minutos - retirar o celular - foco total
+ * 3) - 10 minutos de descanso - alongamento - respiração - água
+ * 4) - 90 minutos de estudo focado
+ * 5) - Fazer anotações - resumos - mapas mentais - revisão
+ * 
+ */

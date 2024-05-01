@@ -12,9 +12,6 @@ export class ReciboDashboardService {
     private http: HttpClient
   ) { }
 
-  //private getRecibosAPI = 'http://localhost:3000/recibosDashboard'
-  // http://localhost:8080/recibos/getRecibosDashboard
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     withCredentials: true
@@ -22,11 +19,7 @@ export class ReciboDashboardService {
   }
   
   // criação método getRecibosDashboard para bucar todos os reccibos
-  apiRecibosMongo = " http://localhost:8080/recibos/getRecibosDashboard";
-
-  // Como tratar os dados para serem renderizados no frontend com
-  // mais facilidade ? 
-
+  apiRecibosMongo = " http://localhost:8080/recibos/getRecibosDashboardFindAll";
   
   getRecibosDashboard(): Observable<RecibosDashboardClasse[]>{
     return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions)    

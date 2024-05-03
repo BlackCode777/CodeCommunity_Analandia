@@ -5,7 +5,6 @@
     <div class="card-header">
       <h4>Dashboard de Recibos do mês {{ "Fevereiro" }}</h4>
     </div>
-
     <div class="botao-cadastro-recibo">
       <!-- Criando o botão para tela de cadastro de recibos -->
       <div class="card-body">
@@ -14,64 +13,41 @@
         </button>
       </div>
     </div>
-
     <!-- Criar campo imput de pesquisa com botão ícone de pesquisa -->
     <form class="card-form-search col-md-2">
       <div class="card-body">
         <label>Pesquisa de recibos por data</label>
         <div class="input-group">
-          <input
-            type="date"
-            class="form-control"
-            placeholder="Pesquisar recibo"
-          />
+          <input type="date" class="form-control" placeholder="Pesquisar recibo" />
         </div>
       </div>
     </form>
-
-    <!-- @for( recibo of listaRecibos; track recibo.idReciboDashboard ){ -->
     <div class="card-body">
-      <!--  *ngFor="let recibo of listaRecibos; let i = index" -->
-
       <div class="row">
-		@for ( item of listaRecibos; track item._id) {
-			<div class="card col-md-3">
-				<div
-				  class="card-header"
-				  style="
-					display: flex;
-					justify-content: space-between;
-					margin-top: 10px;
-				  "
-				>
-				  <h5>Recibo</h5>
-				  <h6>Data {{ item.dataReciboDashboard }}</h6>
-          <button class="btn btn-primary" 
-          (click)="editarReciboJaCadastrado(item)"
-          >Editar</button>
-          <button class="btn btn-danger" (click)="deletarReciboDashboard(item._id)">Deletar</button>
-            
-				</div>
-				<div class="card-body">
-				  <p>Donativos para Obra Mundial: R${{ item.donativoObraMundRecDashboard }}  </p>
-				  <p>Donativo - Desp.Congregação local: R${{item.donativoDespCongrLocalRecDash}}</p>
-				  <p>Tipo:{{ item.donativoTipo }} (Donativo/Pagamento/Adiantamento)  </p>
-				  <p>Arranjo de ônibus: R$ {{ item.arranjoDeOnibus }}</p>
-
-          <!--
-            copilot - os campos não estão renderizando os valores corretamente, como corrigir?
-            <p>Valor total: R$ {{ item.valorTotalReciboDashboard }}</p>
-            isso não funciona, tente outra abordagem
-          -->
-				  <!-- <p>Valor total: R$ {{4.950,00}}</p> -->
-				  <!-- <div src="url"></div> -->
-          
-				</div>
-			  </div>
-		}          
-        
+        @for ( item of listaRecibos; track item._id) {
+          <div class="card col-md-3">
+            <div class="card-header" style=" display: flex; justify-content: space-between; margin-top: 10px;">
+              <h5>Recibo</h5>
+              <h6>Data {{ item.dataReciboDashboard }}</h6>
+              <button class="btn btn-primary" (click)="editarReciboJaCadastrado(item)" >Editar</button>
+              <button class="btn btn-danger" (click)="deletarReciboDashboard(item._id)">Deletar</button>                
+            </div>
+            <div class="card-body">
+              <p>Donativos para Obra Mundial: R${{ item.donativoObraMundRecDashboard }}  </p>
+              <p>Donativo - Desp.Congregação local: R${{item.donativoDespCongrLocalRecDash}}</p>
+              <p>Tipo:{{ item.donativoTipo }} (Donativo/Pagamento/Adiantamento)  </p>
+              <p>Arranjo de ônibus: R$ {{ item.arranjoDeOnibus }}</p>
+              <!--
+                copilot - os campos não estão renderizando os valores corretamente, como corrigir?
+                <p>Valor total: R$ {{ item.valorTotalReciboDashboard }}</p>
+                isso não funciona, tente outra abordagem
+              -->
+              <!-- <p>Valor total: R$ {{4.950,00}}</p> -->
+              <!-- <div src="url"></div> -->
+            </div>
+          </div>
+        } 
       </div>
     </div>
-    <!-- } -->
   </div>
 </section>

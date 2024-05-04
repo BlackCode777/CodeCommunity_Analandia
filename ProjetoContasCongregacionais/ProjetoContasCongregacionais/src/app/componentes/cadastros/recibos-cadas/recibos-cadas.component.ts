@@ -92,8 +92,8 @@ export class RecibosCadasComponent {
   }
   
   // Método para buscar os dados do recibo e popular os campos do formulário
-  buscarDadosDoRecibo(id: number) {
-    this.popularCamposComDadosDoRecibo(id);
+  buscarDadosDoRecibo(_id: number) {
+    this.popularCamposComDadosDoRecibo(_id);
   }
 
   // Método para popular os campos do formulário com os dados do recibo

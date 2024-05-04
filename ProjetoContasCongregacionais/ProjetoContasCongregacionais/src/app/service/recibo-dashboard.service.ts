@@ -21,13 +21,13 @@ export class ReciboDashboardService {
   // criação método getRecibosDashboard para bucar todos os reccibos
   apiRecibosMongo = " http://localhost:8080/recibos/getRecibosDashboardFindAll";
   
-  getRecibosDashboard(): Observable<RecibosDashboardClasse[]>{
+  getRecibosDashboardFindAll(): Observable<RecibosDashboardClasse[]>{
     return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions)    
   }
 
   // criação de método put para atualizar recibos
-  getRecibosPorId(id: any): Observable<RecibosDashboardClasse> {
-    return this.http.get<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + id, this.httpOptions);
+  getRecibosPorId(_id: any): Observable<RecibosDashboardClasse> {
+    return this.http.get<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
   }
 
   updateReciboJaCadastrado(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {
@@ -39,8 +39,8 @@ export class ReciboDashboardService {
   }
 
   // criar para deletar recibos
-  deleteRecibo(id: string): Observable<RecibosDashboardClasse>{
-    return this.http.delete<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + id, this.httpOptions);
+  deleteRecibo(_id: string): Observable<RecibosDashboardClasse>{
+    return this.http.delete<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
   }
   
   cadastraReciboPost(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {    

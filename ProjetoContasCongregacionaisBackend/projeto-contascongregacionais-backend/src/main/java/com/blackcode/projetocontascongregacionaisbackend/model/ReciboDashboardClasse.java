@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 public class ReciboDashboardClasse {
 
     @MongoId(FieldType.OBJECT_ID)
-    private ObjectId id;
+    private ObjectId _id;
 
     @Indexed
     private String mesReciboDashboard;
@@ -38,11 +38,11 @@ public class ReciboDashboardClasse {
     private String donativoTipo;
 
     public void constructor(
-            ObjectId id,
+            ObjectId _id,
             String mesReciboDashboard, Date dataReciboDashboard,
             Float donativoObraMundRecDashboard, Float donativoDespCongrLocalRecDash, Float arranjoDeOnibus,
             String donativoTipo) {
-        this.id = id;
+        this._id = _id;
         this.mesReciboDashboard = mesReciboDashboard;
         this.dataReciboDashboard = dataReciboDashboard;
         this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
@@ -63,9 +63,9 @@ public class ReciboDashboardClasse {
     /**
      * create method for sum of values of according to the with same month
      */
-    public <T> T valuesAccordingToTheMonth(Date month, Long id, Class<T> type) {
+    public <T> T valuesAccordingToTheMonth(Date month, Long _id, Class<T> type) {
         String message = "The month not is the same of the month and id not is equal to id";
-        if (this.mesReciboDashboard.equals(month) && this.id.equals(id)) {
+        if (this.mesReciboDashboard.equals(month) && this._id.equals(_id)) {
             Float sum = this.donativoObraMundRecDashboard + this.donativoDespCongrLocalRecDash + this.arranjoDeOnibus;
             if (type.isAssignableFrom(Float.class)) {
                 return type.cast(sum);

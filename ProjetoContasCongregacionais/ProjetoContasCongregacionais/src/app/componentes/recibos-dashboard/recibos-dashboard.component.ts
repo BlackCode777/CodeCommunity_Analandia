@@ -51,19 +51,19 @@ export class RecibosDashboardComponent {
 
   ngOnInit() {
     // Buscando todos os recibos para lista
-    this.getRecibosDashboard();
+    this.getRecibosDashboardFindAll();
     //this.routeActivated.queryParams.pipe()
     this.routeActivated.queryParams.subscribe((params) => {
-      let id = params['id'];
-      if (id !== null && id !== undefined && id.lenght > 0) {
-        this.Recibo.getRecibosDashboard()
+      let _id = params['_id'];
+      if (_id !== null && _id !== undefined && _id.lenght > 0) {
+        this.Recibo.getRecibosDashboardFindAll()
           .pipe()
           .subscribe((response) => {
             this.listaRecibos = response;
             let i = 0;
             this.listaRecibos.forEach((element) => {
               i++;
-              if (element._id === id) {
+              if (element._id === _id) {
                 this.editarReciboJaCadastrado(element);
               }
               if (i === this.listaRecibos.length) {
@@ -80,7 +80,7 @@ export class RecibosDashboardComponent {
     this.Recibo.updateReciboJaCadastrado(recibo).subscribe(
       () => {
         console.log('Recibo atualizado com sucesso');
-        this.getRecibosDashboard();
+        this.getRecibosDashboardFindAll();
         this.router.navigate(['editarRecibo', recibo._id]);
       },
       (err: any) => {
@@ -90,16 +90,16 @@ export class RecibosDashboardComponent {
   }
 
   // Método para deletar recibo por id
-  deletarReciboDashboard(id: string) {
+  deletarReciboDashboard(_id: string) {
     console.log('Deletar recibo');
-    this.Recibo.deleteRecibo(id).subscribe(() => {
+    this.Recibo.deleteRecibo(_id).subscribe(() => {
       console.log('Recibo deletado com sucesso');
-      this.getRecibosDashboard();
+      this.getRecibosDashboardFindAll();
     });
   }
 
-  getRecibosDashboard() {
-    this.Recibo.getRecibosDashboard().subscribe(
+  getRecibosDashboardFindAll() {
+    this.Recibo.getRecibosDashboardFindAll().subscribe(
       (recibo: RecibosDashboardClasse[]) => {
         console.log(recibo);
         let reciboObj = Object.values(recibo);

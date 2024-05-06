@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry, throwError } from 'rxjs';
-import { RecibosDashboardClasse } from '../model/RecibosDashboardClasse';
+import { catchError, map, Observable, retry, throwError } from 'rxjs';
+import { ClasseRecibosDashboard } from '../model/RecibosDashboardClasse';
 
 @Injectable({
   providedIn: 'root'
@@ -14,42 +14,49 @@ export class ReciboDashboardService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    withCredentials: true
+    withCredentials: false
     /* Ajustar tratamento dos dados */
   }
   
   // criação método getRecibosDashboard para bucar todos os reccibos
   apiRecibosMongo = " http://localhost:8080/recibos/getRecibosDashboardFindAll";
+  api = "http://localhost:8080/recibos"
   
-  getRecibosDashboardFindAll(): Observable<RecibosDashboardClasse[]>{
-    return this.http.get<RecibosDashboardClasse[]>(this.apiRecibosMongo, this.httpOptions)    
+  getRecibosDashboardFindAll(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.api}/getRecibosDashboardFindAll`, this.httpOptions)
+    .pipe(
+      map(data => Array.isArray(data) ? data : [data]),  // Certifica que a saída sempre será um array
+      map(recibos => recibos.map(recibo => new ClasseRecibosDashboard(recibo)))
+    );
   }
 
-  // criação de método put para atualizar recibos
-  getRecibosPorId(_id: any): Observable<RecibosDashboardClasse> {
-    return this.http.get<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
-  }
-
-  updateReciboJaCadastrado(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {
-    return this.http.put<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + recibo._id, JSON.stringify(recibo)) //, this.httpOptions
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
-  }
-
-  // criar para deletar recibos
-  deleteRecibo(_id: string): Observable<RecibosDashboardClasse>{
-    return this.http.delete<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
-  }
-  
-  cadastraReciboPost(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {    
-    return this.http.post<RecibosDashboardClasse>(this.apiRecibosMongo, JSON.stringify(recibo)) //, this.httpOptions
+  cadastraReciboPost(recibo: ClasseRecibosDashboard): Observable<ClasseRecibosDashboard> {    
+    return this.http.post<ClasseRecibosDashboard>(` ${this.api}/postRecibosDashboardSave `, JSON.stringify(recibo), this.httpOptions) //, postRecibosDashboardSave
     .pipe(
       retry(2),
       catchError(this.handleError)
     );      
   }
+
+  // criação de método put para atualizar recibos
+  // getRecibosPorId(_id: any): Observable<RecibosDashboardClasse> {
+  //   return this.http.get<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
+  // }
+
+  // updateReciboJaCadastrado(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {
+  //   return this.http.put<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + recibo._id, JSON.stringify(recibo)) //, this.httpOptions
+  //     .pipe(
+  //       retry(1),
+  //       catchError(this.handleError)
+  //     )
+  // }
+
+  // criar para deletar recibos
+  // deleteRecibo(_id: string): Observable<RecibosDashboardClasse>{
+  //   return this.http.delete<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
+  // }
+  
+  
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';

@@ -17,7 +17,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea'; // Importar InputTextareaModule
 import { TableModule } from 'primeng/table';
-import { RecibosDashboardClasse } from '../../../model/RecibosDashboardClasse';
+import { ClasseRecibosDashboard } from '../../../model/RecibosDashboardClasse';
 import { ReciboDashboardService } from '../../../service/recibo-dashboard.service';
 
 /**
@@ -61,7 +61,7 @@ export class RecibosCadasComponent {
   ) {}
 
   // Supondo que você tenha um formulário vinculado a este modelo
-  novoRecibo: RecibosDashboardClasse = {
+  novoRecibo: ClasseRecibosDashboard = {
     _id: '',
     mesReciboDashboard: '',
     dataReciboDashboard: '',
@@ -74,43 +74,43 @@ export class RecibosCadasComponent {
   toHideButtonEditReceipt: boolean = false;
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id']; // Fix: Acessando propriedade 'id' usando colchetes
-    this.buscarDadosDoRecibo(id);
+    const _id = this.route.snapshot.params['_id']; // Fix: Acessando propriedade 'id' usando colchetes
+    this.buscarDadosDoRecibo(_id);
   }
 
   // Método para enviar os dados editados do recibo
-  enviarDadosEditadosDoRecibo() {
-    // implementation of the method
-    this.recibo
-      .updateReciboJaCadastrado(this.novoRecibo)
-      .subscribe((recibo: RecibosDashboardClasse) => {
-        this.novoRecibo = recibo;
-        alert('Recibo atualizado com sucesso!');
-        console.log(recibo);
-        this.resetForm(); // chamada do método resetForm
-      });
-  }
+  // enviarDadosEditadosDoRecibo() {
+  //   // implementation of the method
+  //   this.recibo
+  //     .updateReciboJaCadastrado(this.novoRecibo)
+  //     .subscribe((recibo: RecibosDashboardClasse) => {
+  //       this.novoRecibo = recibo;
+  //       alert('Recibo atualizado com sucesso!');
+  //       console.log(recibo);
+  //       this.resetForm(); // chamada do método resetForm
+  //     });
+  // }
   
   // Método para buscar os dados do recibo e popular os campos do formulário
   buscarDadosDoRecibo(_id: number) {
-    this.popularCamposComDadosDoRecibo(_id);
+    //this.popularCamposComDadosDoRecibo(_id);
   }
 
   // Método para popular os campos do formulário com os dados do recibo
-  popularCamposComDadosDoRecibo(id: number) {
-    this.recibo.getRecibosPorId(id).subscribe((recibo: RecibosDashboardClasse) => {
-      this.novoRecibo = recibo;
-    });
-  }
+  // popularCamposComDadosDoRecibo(id: number) {
+  //   this.recibo.getRecibosPorId(id).subscribe((recibo: RecibosDashboardClasse) => {
+  //     this.novoRecibo = recibo;
+  //   });
+  // }
 
   cadastrarecibopost() {
     // implementation of the method
     this.recibo
       .cadastraReciboPost(this.novoRecibo)
-      .subscribe((recibo: RecibosDashboardClasse) => {
+      .subscribe((recibo: any) => {
         this.novoRecibo = recibo
         alert('Recibo cadastrado com sucesso!');
-        //this.novoRecibo = recibo[0];
+        this.novoRecibo = recibo;
         console.log(recibo);
         this.resetForm(); // Chamada do método resetForm
       });

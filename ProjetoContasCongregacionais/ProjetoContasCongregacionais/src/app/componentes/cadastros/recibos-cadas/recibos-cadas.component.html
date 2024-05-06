@@ -1,11 +1,13 @@
 <section class="section-form-main">
   <h3>Cadastre aqui o recibo dos donativos coletados após a reunião</h3>
   <div class="div-botao-cadas" *ngIf="novoRecibo">
+
     <!--botão para submeter o formulario-->
-    <button class="btn btn-primary" 
-    
+    <!-- <button class="btn btn-primary"     
     (click)="enviarDadosEditadosDoRecibo()">    
-      Recibo editado</button>
+      Recibo editado
+    </button> -->
+
     <button class="btn btn-primary" (click)="cadastrarecibopost()">
       Cadastrar novo recibo
     </button>
@@ -20,7 +22,9 @@
       <div class="card-body">
         <label>Cadastro de recibos</label>
 
-        <div>
+        <hr style="color: aliceblue;">
+
+        <div [style]="{ 'margin-top': '1em' }">
           <label for="mesReciboDashboard">Mês do recibo</label>
           <input
             type="month"
@@ -31,7 +35,7 @@
           />
         </div>
 
-        <div>
+        <div [style]="{ 'margin-top': '1em' }">
           <label for="dataReciboDashboard">Data do recibo</label>
           <input
             type="date"
@@ -41,8 +45,9 @@
             name="dataReciboDashboard"
           />
         </div>
+        
 
-        <div>
+        <div [style]="{ 'margin-top': '1em' }">
           <label for="donativoObraMundRecDashboard"
             >Donativos para Obra Mundial</label
           >
@@ -55,7 +60,7 @@
           />
         </div>
 
-        <div>
+        <div [style]="{ 'margin-top': '1em' }">
           <label for="donativoDespCongrLocalRecDash"
             >Donativo - Despesas da Congregação Local</label
           >
@@ -69,7 +74,7 @@
         </div>
 
         <!--Crie um dropdown para o campo "tipo de doação"-->
-        <div>
+        <div [style]="{ 'margin-top': '1em' }">
           <label for="donativoTipo">Tipos de donativos</label>
           <select
             class="form-control"
@@ -84,7 +89,7 @@
           </select>
         </div>
 
-        <div>
+        <div [style]="{ 'margin-top': '1em' }">
           <label for="arranjoDeOnibus">Arranjo de ônibus</label>
           <input
             type="number"

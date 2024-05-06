@@ -22,21 +22,22 @@
         </div>
       </div>
     </form>
-    <div class="card-body">
-      <div class="row">
-        @for ( item of listaRecibos; track item._id) {
+    <div class="card-body"  *ngFor="let item of listaRecibos; trackBy: trackById ">
+      <div class="row"  *ngIf="item">
+        <!-- @for ( item of listaRecibos; track item.id) { -->
           <div class="card col-md-3">
             <div class="card-header" style=" display: flex; justify-content: space-between; margin-top: 10px;">
               <h5>Recibo</h5>
-              <h6>Data {{ item.dataReciboDashboard }}</h6>
-              <button class="btn btn-primary" (click)="editarReciboJaCadastrado(item)" >Editar</button>
-              <button class="btn btn-danger" (click)="deletarReciboDashboard(item._id)">Deletar</button>                
+              <h6>Data: {{ item.dataReciboDashboard }}</h6>
+              <!--? (item.dataReciboDashboard | date : 'mediumDate') : 'Data não disponível-->
+              <!-- <button class="btn btn-primary" (click)="editarReciboJaCadastrado(item)" >Editar</button>
+              <button class="btn btn-danger" (click)="deletarReciboDashboard(item._id)">Deletar</button>                 -->
             </div>
             <div class="card-body">
-              <p>Donativos para Obra Mundial: R${{ item.donativoObraMundRecDashboard }}  </p>
-              <p>Donativo - Desp.Congregação local: R${{item.donativoDespCongrLocalRecDash}}</p>
+              <p>Donativos para Obra Mundial: R${{ item.donativoObraMundRecDashboard | number:'1.2-2' }} </p>
+              <p>Donativo - Desp.Congregação local: R${{item.donativoDespCongrLocalRecDash | number:'1.2-2' }}</p>
               <p>Tipo:{{ item.donativoTipo }} (Donativo/Pagamento/Adiantamento)  </p>
-              <p>Arranjo de ônibus: R$ {{ item.arranjoDeOnibus }}</p>
+              <p>Arranjo de ônibus: R$ {{ item.arranjoDeOnibus | number:'1.2-2' }}</p>
               <!--
                 copilot - os campos não estão renderizando os valores corretamente, como corrigir?
                 <p>Valor total: R$ {{ item.valorTotalReciboDashboard }}</p>
@@ -45,8 +46,11 @@
               <!-- <p>Valor total: R$ {{4.950,00}}</p> -->
               <!-- <div src="url"></div> -->
             </div>
+
+            {{ item.dataReciboDashboard | json}}
+
           </div>
-        } 
+        <!-- }  -->
       </div>
     </div>
   </div>

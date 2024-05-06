@@ -1,7 +1,6 @@
 package com.blackcode.projetocontascongregacionaisbackend.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,8 @@ public class ReciboDashboardService {
     // busca todos os recibos na base
     public List<ReciboDashboardClasse> findAll() {
         // buscando todos os recibos
-        Optional<List<ReciboDashboardClasse>> recibos = Optional.ofNullable(reciboRepo.findAll());
-        return recibos.get();
+        List<ReciboDashboardClasse> recibos = reciboRepo.findAll();
+        return recibos;
     }
 
     // public List<ReciboDashboardClasse> findAll() {

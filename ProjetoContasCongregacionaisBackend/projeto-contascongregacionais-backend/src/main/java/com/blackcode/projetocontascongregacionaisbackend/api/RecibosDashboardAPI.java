@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,51 +24,23 @@ public class RecibosDashboardAPI {
 
     @Autowired
     ReciboDashboardService reciboService;
-    private static Logger LOG = LoggerFactory.getLogger(RecibosDashboardAPI.class);
+    private static final Logger logger = LoggerFactory.getLogger(RecibosDashboardAPI.class);
 
-    // @CrossOrigin(origins = "http://localhost:4200")
-    // @GetMapping("/getRecibosDashboardFindAll")
-    // public ResponseEntity<Object>
-    // getRecibosDashboardFindAll(@RequestParam(required = false) String param) {
-    // ObjectMapper mensagemJson = new ObjectMapper();
-    // try {
-    // List<ReciboDashboardClasse> recibo = reciboService.findAll();
-
-    // System.out.println("Recibo _############_ : " + recibo);
-
-    // if (recibo.isEmpty()) {
-    // mensagemJson.put("message", "Nenhum recibo encontrado.");
-    // return
-    // ResponseEntity.status(HttpStatus.NO_CONTENT).body(mensagemJson.toString());
-    // } else {
-    // return ResponseEntity.ok(recibo.get(0));
-    // }
-    // } catch (Exception e) {
-    // LOG.error("Erro ao buscar recibos do dashboard", e);
-    // String mensagem = e.getMessage() + (isNull(e.getCause()) ? "" : " Causa: " +
-    // e.getCause().getMessage());
-    // mensagemJson.put("erro", mensagem);
-    // return
-    // ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mensagemJson.toString());
-    // }
-    // }
-
+    @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowedHeaders = "*")
     @GetMapping("/getRecibosDashboardFindAll")
-    public ResponseEntity<ReciboDashboardClasse> getRecibosDashboardFindAll(
+    public ResponseEntity<List<ReciboDashboardClasse>> getRecibosDashboardFindAll(
             @RequestParam(required = false) String param) {
         List<ReciboDashboardClasse> recibo = reciboService.findAll();
-        return recibo.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(recibo.get(0));
+        logger.info("Recibo _############_ : {}", recibo);
+        return recibo.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(recibo);
+
+    }
+
+    // metodo post
+    @PostMapping("/postRecibosDashboardSave")
+    public ResponseEntity<ReciboDashboardClasse> postRecibosDashboardSave(@RequestBody ReciboDashboardClasse recibo) {
+        ReciboDashboardClasse savedRecibo = reciboService.save(recibo);
+        return ResponseEntity.ok(savedRecibo);
     }
 
 }
-
-/*
- * PREPARAÇÂO PARA ESTUDAR MELHOR
- * 
- * 1) - entrar no clima do estudo - ler alguma coisa que inspire
- * 2) - estudo focado profundo - 90 minutos - retirar o celular - foco total
- * 3) - 10 minutos de descanso - alongamento - respiração - água
- * 4) - 90 minutos de estudo focado
- * 5) - Fazer anotações - resumos - mapas mentais - revisão
- * 
- */

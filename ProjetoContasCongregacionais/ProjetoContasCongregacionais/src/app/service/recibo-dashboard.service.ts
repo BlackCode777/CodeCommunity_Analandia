@@ -38,26 +38,6 @@ export class ReciboDashboardService {
     );      
   }
 
-  // criação de método put para atualizar recibos
-  // getRecibosPorId(_id: any): Observable<RecibosDashboardClasse> {
-  //   return this.http.get<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
-  // }
-
-  // updateReciboJaCadastrado(recibo: RecibosDashboardClasse): Observable<RecibosDashboardClasse> {
-  //   return this.http.put<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + recibo._id, JSON.stringify(recibo)) //, this.httpOptions
-  //     .pipe(
-  //       retry(1),
-  //       catchError(this.handleError)
-  //     )
-  // }
-
-  // criar para deletar recibos
-  // deleteRecibo(_id: string): Observable<RecibosDashboardClasse>{
-  //   return this.http.delete<RecibosDashboardClasse>(this.apiRecibosMongo + '/' + _id, this.httpOptions);
-  // }
-  
-  
-
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

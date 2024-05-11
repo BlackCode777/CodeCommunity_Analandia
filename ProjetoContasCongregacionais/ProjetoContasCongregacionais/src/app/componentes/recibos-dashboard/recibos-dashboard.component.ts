@@ -13,6 +13,24 @@ import {
 import { ClasseRecibosDashboard } from '../../model/RecibosDashboardClasse';
 import { ReciboDashboardService } from '../../service/recibo-dashboard.service';
 import { RecibosCadasComponent } from '../cadastros/recibos-cadas/recibos-cadas.component';
+//import { PropertyDescriptor } from '@angular/core'; // Import PropertyDescriptor type
+
+// function LogRouteParameter(target: any, key: string, descriptor: PropertyDescriptor) {
+//   const originalMethod = descriptor.value;
+
+//   descriptor.value = function(...args: any[]) {
+//     // Aqui 'args' são os argumentos com os quais 'getParameterIdInRote' pode ser chamada, que no caso de Angular geralmente não são utilizados.
+//     if (this.routeActivated.snapshot.queryParams['id']) {
+//       console.log(`Function ${key} called with route ID: ${this['routeActivated'].snapshot.queryParams['id']}`);
+//       const result = originalMethod.apply(this, args);
+//       return result;
+//     } else {
+//       console.log(`Function ${key} called without valid route ID`);
+//       return null;
+//     }
+//   };
+//   return descriptor;
+// }
 
 @Component({
   selector: 'app-recibos-dashboard',
@@ -36,24 +54,6 @@ import { RecibosCadasComponent } from '../cadastros/recibos-cadas/recibos-cadas.
   styleUrl: './recibos-dashboard.component.scss',
 })
 
-
-// function LogRouteParameter(target: any, key: string, descriptor: PropertyDescriptor) {
-//   const originalMethod = descriptor.value;
-
-//   descriptor.value = function(...args: any[]) {
-//     // Aqui 'args' são os argumentos com os quais 'getParameterIdInRote' pode ser chamada, que no caso de Angular geralmente não são utilizados.
-//     if (this.routeActivated.snapshot.queryParams['id']) {
-//       console.log(`Function ${key} called with route ID: ${this['routeActivated'].snapshot.queryParams['id']}`);
-//       const result = originalMethod.apply(this, args);
-//       return result;
-//     } else {
-//       console.log(`Function ${key} called without valid route ID`);
-//       return null;
-//     }
-//   };
-// return descriptor;
-// }
-
 export class RecibosDashboardComponent {
   constructor(
     private router: Router,
@@ -72,19 +72,7 @@ export class RecibosDashboardComponent {
     // Pegando id da rota
     this.getParameterIdInRote()    
   }
-
-  // Melhorando a função com pipe / witchMap
-  // getParameterIdInRote(){
-  //   // Pegando id da rota
-  //   this.routeActivated.queryParams.pipe(
-  //     filter(params => params['id'] && params['id'].lenght > 0),
-  //     switchMap(params => this.reciboService.getRecibosDashboardFindAll())
-  //   ).subscribe((response) => {
-  //     this.listaRecibos = response;
-  //   }, error => console.error('Erro ao carregar recibos:', error));    
-  // }
-
-
+  
   getParameterIdInRote(){
     // Pegando id da rota
     this.routeActivated.queryParams.subscribe((params) => {

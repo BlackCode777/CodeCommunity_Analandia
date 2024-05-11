@@ -1,23 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HeaderComponent } from './header.component';
+import { TestBed } from "@angular/core/testing";
+import { HeaderComponent } from "./header.component";
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HeaderComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    // criando um beforeEach para carregar o módulo do componente
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [HeaderComponent]
+        }).compileComponents();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    // Escrevendo um test para verificar se o componente foi criado
+    it("Teste para ver se o componente Header foi criado", () => {
+        const fixture = TestBed.createComponent(HeaderComponent);
+        const app = fixture.componentInstance;
+        expect(app).toBeTruthy();
+    });
+
 });

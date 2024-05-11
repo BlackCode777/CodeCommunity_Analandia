@@ -1,4 +1,277 @@
 
+copilot peguei uma nova atividade pra fazer, observe a descrição da tarefa e faça um resumo 
+detalhado passo a passo e enumerado com descritivo de cada tarefa e de como realizar cada uma delas.
+segue a descrição da tarefa:
+
+    117 -> Criar métodos de teste unitários - para verificar se os métodos estão recebendo os 
+    parâmetros corretos e retornando os valores corretos.
+    para todas as funções do frontend angular v17 em todos os arquivos de teste unitário. 
+
+    - editarUsuarioID(id)
+        1. recebe o id do usuário a ser editado 
+        2. verifica se o id é valido
+        3. edita o usuário existente pelo id
+        4. Envia o usuário editado para o service
+        5. retorna o usuário editado
+
+    - excluirUsuario(id)
+        1. recebe o id do usuário a ser excluído
+        2. verifica se o id é valido
+        3. exclui o usuário existente pelo id
+        4. Envia o usuário excluído para o service
+        5. Verifica se o usuário foi excluído
+
+    - listarUsuarios()
+        1. lista todos os usuários como array de objetos
+        2. verifica se a lista de usuários é válida
+        3. retorna a lista de usuários
+
+    - listarUsuariosID(id) - seria a tarefa de filtrar por id
+        1. recebe o id do usuário a ser listado
+        2. verifica se o id é valido
+        3. lista o usuário existente pelo id
+        4. Envia o usuário listado para o service
+        5. retorna o usuário listado
+
+    - listarUsuariosCPF() - seria a tarefa de filtrar por cpf
+        1. recebe o cpf do usuário a ser listado
+        2. verifica se o cpf é valido
+        3. lista o usuário existente pelo cpf
+        4. Envia o usuário listado para o service
+        5. retorna o usuário listado
+
+    - listarUsuariosNome() - seria a tarefa de filtrar por nome vinculado ao cpf
+        1. recebe o nome do usuário a ser listado vinculado ao cpf
+        2. verifica se o nome é valido vinculado ao cpf
+        3. lista o usuário existente pelo nome
+        4. Envia o usuário listado para o service vinculado ao cpf
+        5. retorna o usuário listado
+
+    - listarUsuariosPerfil() - seria a tarefa de filtrar por perfil
+        1. recebe o perfil do usuário a ser listado
+        2. verifica se o perfil é valido para acessar determinadas telas do sistema
+        3. lista todos os perfil de usuários existentes no sistema para o usuário que esta logado
+        4. verifica se o usuário esta logado
+        5. retorna o usuário listado
+
+    e o arquivo de teste unitário tem que ter todos esses métodos de teste unitário para cada função do component.ts
+    faça a descritivo de cada tarefa.
+
+
+
+
+
+
+
+
+
+
+**************************************************************
+estou recebendo este erro:
+
+[controle-perfil-user-modal.component.ts:140  POST http://127.0.0.1:8084/ss.usuario/editarUsuarioID/undefined 400 (Bad Request)]
+
+nesse trecho do código:
+
+[editarUsuarioID_(){
+        
+    * o erro 400 bad request acontece nessa próxima linha
+    this.userPerfilService.editarUsuarioID(this.novoItemEditado.id).subscribe(
+        
+        
+        (response) => {
+
+            // valide se o id é valido ou não dentro do response
+            if( response["id"] ){
+                console.error("Erro ao atualizar o usuário ", response["erro"]);
+                return;
+            }
+
+            console.log("Dentro da chamada do service $$$ ", response)
+            const pUser = response["Usuario"]
+            this.novoItemEditado.id = pUser["id"];
+            this.novoItemEditado.nome = pUser["nome"];
+            this.novoItemEditado.cpf = pUser["cpf"];
+            this.novoItemEditado.senha = pUser["senha"];
+            if( pUser && pUser["meusDados"] ){
+                this.novoItemEditado.meusDados = new ClasseMeusDados(
+                    pUser.meusDados["dataCriacao"],
+                    pUser.meusDados["perfil"],
+                    pUser.meusDados["roles"]
+                )
+            }
+            //this.router.navigate(['permissao-users']);
+
+        }, (error) => {
+            console.error("Falha ao atualizar o usuário ", error);
+        }
+    );
+}], me de exemplos em como resolver esse erro, por favor.
+
+editarUsuarioID(id: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/editarUsuarioID/${id}`, id);
+}
+
+este código está certo?
+
+O erro 400 é um erro de requisição, ou seja, o servidor não conseguiu processar a requisição que você enviou. 
+Isso pode ser causado por diversos motivos, como por exemplo, o servidor não estar esperando um valor do tipo que 
+você está enviando, ou o servidor não estar esperando um valor nulo. OK.
+
+Então vamos modificar o servidor para processar a requisição que você está enviando. OK vamos la
+vou te passar o contexto do código no servidor java springboot
+
+API RESTful com Spring Boot e Java
+// ERRO - na hora de receber os dados do front - no campo do [ meusDados.perfil ]
+@PostMapping(value = "/editarUsuarioID/{id}", produces = "application/json;charset=UTF-8")
+public ResponseEntity<String> editarUsuarioID(@RequestBody Usuario userCad) {
+    JSONObject mensagemJson = new JSONObject();
+    try {
+        Usuario savedUser = usuarioService.atualizarUsuario(userCad);
+        ObjectMapper mapper = new ObjectMapper();			
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);			
+        String json = mapper.writeValueAsString(savedUser);
+        mensagemJson.put("Usuario", new JSONObject(json));
+        return ResponseEntity.ok(mensagemJson.toString());
+    } catch (Exception e) {
+        LOG.error("Erro ao processar usuário", e);
+        String mensagem = e.getMessage() + (isNull(e.getCause()) ? "" : e.getCause().getMessage());
+        mensagemJson.put("erro", mensagem);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mensagemJson.toString());
+    }
+}
+
+classe java Usuario.java
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Document(indexName = "sr_usuario", createIndex = false, writeTypeHint = WriteTypeHint.FALSE)
+public class Usuario implements Serializable {
+ 
+	private static final long serialVersionUID = 5822593391711755399L;
+	// Atributos
+	@Id
+	private String id; 
+	@JsonAlias("cpf")
+	private String cpf; 
+	@JsonAlias("nome")
+	private String nome; 
+	@JsonAlias("senha")
+	private String senha; 
+	@JsonAlias("meusDados")
+	private MeusDados meusDados; 
+	public Usuario(String id, String cpf, String nome, String senha, MeusDados meusDados) {
+		this.id = id;this.cpf = cpf;	this.nome = nome;this.senha = senha;this.meusDados = meusDados;	}
+ 
+	public Usuario() {
+		//System.out.print("###$___Passei no construtor___$###");
+	} 
+	public String getId() {	return id;} 
+	public void setId(String id) {	this.id = id;} 
+	public String getCpf() {return cpf;} 
+	public void setCpf(String cpf) {this.cpf = cpf;} 
+	public String getNome() {if (nome == null) { return ""; }
+		return nome;
+	} 
+	public void setNome(String nome) {
+		this.nome = nome;
+	} 
+	public String getSenha() {
+		return senha;
+	} 
+	public void setSenha(String senha) {
+		this.senha = senha;
+	} 
+	public MeusDados getMeusDados() {
+		return meusDados;
+	} 
+	public void setMeusDados(MeusDados meusDados) {
+		this.meusDados = meusDados;
+	} 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+}, 
+
+me de exemplos em como resolver esse erro, por favor. mostre o código necessário para resolver esse erro.
+
+O erro 400 é um erro de requisição, ou seja, o servidor não conseguiu processar a requisição que você enviou.
+Isso pode ser causado por diversos motivos, como por exemplo, o servidor não estar esperando um valor do tipo 
+que você está enviando, ou o servidor não estar esperando um valor nulo. OK.
+
+Então vamos modificar o servidor para processar a requisição que você está enviando. OK vamos la
+vou te passar o contexto do código no servidor java springboot
+
+API RESTful com Spring Boot e Java
+// ERRO - na hora de receber os dados do front - no campo do [ meusDados.perfil ]
+@PostMapping(value = "/editarUsuarioID/{id}", produces = "application/json;charset=UTF-8")
+public ResponseEntity<String> editarUsuarioID(@RequestBody Usuario userCad) {
+    JSONObject mensagemJson = new JSONObject();
+    try {
+        Usuario savedUser = usuarioService.atualizarUsuario(userCad);
+        ObjectMapper mapper = new ObjectMapper();			
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);			
+        String json = mapper.writeValueAsString(savedUser);
+        mensagemJson.put("Usuario", new JSONObject(json));
+        return ResponseEntity.ok(mensagemJson.toString());
+    } catch (Exception e) {
+        LOG.error("Erro ao processar usuário", e);
+        String mensagem = e.getMessage() + (isNull(e.getCause()) ? "" : e.getCause().getMessage());
+        mensagemJson.put("erro", mensagem);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mensagemJson.toString());
+    }
+}
+
+classe java Usuario.java
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Document(indexName = "sr_usuario", createIndex = false, writeTypeHint = WriteTypeHint.FALSE)
+public class Usuario implements Serializable {
+ 
+    private static final long serialVersionUID = 5822593391711755399L;
+    // Atributos
+    @Id
+    private String id; 
+    @JsonAlias("cpf")
+    private String cpf; 
+    @JsonAlias("nome")
+    private String nome; 
+    @JsonAlias("senha")
+    private String senha; 
+    @JsonAlias("meusDados")
+    private MeusDados meusDados; 
+    public Usuario(String id, String cpf, String nome, String senha, MeusDados meusDados) {
+        this.id = id;this.cpf = cpf;	this.nome = nome;this.senha = senha;this.meusDados = meusDados;	}
+ 
+    public Usuario() {
+        //System.out.print("###$___Passei no construtor___$###");
+    } 
+    public String getId() {	return id;} 
+    public void setId(String id) {	this.id = id;} 
+    public String getCpf() {return cpf;} 
+    public void setCpf(String cpf) {this.cpf = cpf;} 
+    public String getNome() {if (nome == null) { return ""; }
+        return nome;
+    } 
+    public void setNome(String nome) {
+        this.nome = nome;
+    } 
+    public String getSenha() {
+        return senha;
+    } 
+    public void setSenha(String senha) {
+        this.senha = senha;
+    } 
+    public MeusDados getMeusDados() {
+        return meusDados;
+    } 
+    public void setMeusDados(MeusDados meusDados) {
+        this.meusDados = meusDados;
+    } 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+},
+
 
 
 *****************************************************************************************************

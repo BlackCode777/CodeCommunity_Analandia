@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
+import { FolhaContasComponent } from "./folha-contas.component";
 
-import { FolhaContasComponent } from './folha-contas.component';
 
 describe('FolhaContasComponent', () => {
-  let component: FolhaContasComponent;
-  let fixture: ComponentFixture<FolhaContasComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FolhaContasComponent]
-    })
-    .compileComponents();
+    // criando um beforeEach para carregar o módulo do componente
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [FolhaContasComponent]
+        }).compileComponents();
+    });
     
-    fixture = TestBed.createComponent(FolhaContasComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    // Escrevendo um test para verificar se o componente foi criado
+    it("Teste para ver se o componente FolhaContas foi criado", () => {
+        const fixture = TestBed.createComponent(FolhaContasComponent);
+        const app = fixture.componentInstance;
+        expect(app).toBeTruthy();
+    });
+  
 });

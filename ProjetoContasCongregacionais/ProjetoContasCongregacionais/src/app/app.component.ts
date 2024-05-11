@@ -19,9 +19,6 @@ import { ReciboDashboardService } from './service/recibo-dashboard.service';
     ButtonModule,
     RippleModule,
 
-    //provideHttpClient(withFetch()),
-
-    // Importando os componentes
     RecibosCadasComponent,
     RecibosDashboardComponent,
   ],

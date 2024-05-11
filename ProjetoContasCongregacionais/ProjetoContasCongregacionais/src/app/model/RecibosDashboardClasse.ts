@@ -8,7 +8,7 @@ export class ClasseRecibosDashboard {
   arranjoDeOnibus: number;
 
   constructor(data: any) {
-    this._id = data._id;
+    this._id = data._id || 'ID não informado'; ;
     this.mesReciboDashboard = data.mesReciboDashboard || 'Data não informada'; // Exemplo de fallback
     this.dataReciboDashboard = data.dataReciboDashboard || 'Data não disponível';
     this.donativoObraMundRecDashboard = data.donativoObraMundRecDashboard || 0;

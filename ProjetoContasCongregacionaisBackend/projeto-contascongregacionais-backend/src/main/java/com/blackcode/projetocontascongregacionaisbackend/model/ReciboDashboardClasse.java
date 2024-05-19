@@ -1,6 +1,7 @@
 
 package com.blackcode.projetocontascongregacionaisbackend.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
@@ -22,27 +23,33 @@ public class ReciboDashboardClasse {
     private String mesReciboDashboard;
 
     @Indexed
-    private Date dataReciboDashboard;
+    private String dataReciboDashboard;
 
     @Indexed
-    private Float donativoObraMundRecDashboard;
+    @Field("donativoObraMundRecDashboard")
+    private BigDecimal donativoObraMundRecDashboard;  // Usando BigDecimal
 
     @Indexed
-    private Float donativoDespCongrLocalRecDash;
+    @Field(targetType = FieldType.DECIMAL128)
+    private BigDecimal donativoDespCongrLocalRecDash;  // Usando BigDecimal
 
     @Indexed
-    private Float arranjoDeOnibus;
+    @Field(targetType = FieldType.DECIMAL128)
+    private BigDecimal arranjoDeOnibus;  // Usando BigDecimal
 
     @Indexed
     @Field(targetType = FieldType.STRING)
     private String donativoTipo;
 
+
     public void constructor(
-            ObjectId _id,
-            String mesReciboDashboard, Date dataReciboDashboard,
-            Float donativoObraMundRecDashboard, Float donativoDespCongrLocalRecDash, Float arranjoDeOnibus,
+            ObjectId id,
+            String mesReciboDashboard, String dataReciboDashboard,
+            BigDecimal donativoObraMundRecDashboard, 
+            BigDecimal donativoDespCongrLocalRecDash, 
+            BigDecimal arranjoDeOnibus,
             String donativoTipo) {
-        this._id = _id;
+        this._id = id;
         this.mesReciboDashboard = mesReciboDashboard;
         this.dataReciboDashboard = dataReciboDashboard;
         this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
@@ -53,8 +60,10 @@ public class ReciboDashboardClasse {
 
     // Criar métodos para soma dos valores this.donativoObraMundRecDashboard /
     // this.donativoDespCongrLocalRecDash / this.arranjoDeOnibus
-    public void constructor(Float donativoObraMundRecDashboard, Float donativoDespCongrLocalRecDash,
-            Float arranjoDeOnibus) {
+    public void constructor(
+            BigDecimal donativoObraMundRecDashboard, 
+            BigDecimal donativoDespCongrLocalRecDash,
+            BigDecimal arranjoDeOnibus) {
         this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
         this.donativoDespCongrLocalRecDash = donativoDespCongrLocalRecDash;
         this.arranjoDeOnibus = arranjoDeOnibus;
@@ -63,10 +72,10 @@ public class ReciboDashboardClasse {
     /**
      * create method for sum of values of according to the with same month
      */
-    public <T> T valuesAccordingToTheMonth(Date month, Long _id, Class<T> type) {
+    public <T> T valuesAccordingToTheMonth(Date month, Long id, Class<T> type) {
         String message = "The month not is the same of the month and id not is equal to id";
-        if (this.mesReciboDashboard.equals(month) && this._id.equals(_id)) {
-            Float sum = this.donativoObraMundRecDashboard + this.donativoDespCongrLocalRecDash + this.arranjoDeOnibus;
+        if (this.mesReciboDashboard.equals(month) && this._id.equals(id)) {
+            BigDecimal sum = this.donativoObraMundRecDashboard.add(this.donativoDespCongrLocalRecDash).add(this.arranjoDeOnibus);
             if (type.isAssignableFrom(Float.class)) {
                 return type.cast(sum);
             } else {
@@ -92,35 +101,35 @@ public class ReciboDashboardClasse {
         this.mesReciboDashboard = mesReciboDashboard;
     }
 
-    public void setDonativoObraMundRecDashboard(Float donativoObraMundRecDashboard) {
+    public void setDonativoObraMundRecDashboard(BigDecimal donativoObraMundRecDashboard) {
         this.donativoObraMundRecDashboard = donativoObraMundRecDashboard;
     }
 
     /**
-     * @return Float return the donativoDespCongrLocalRecDash
+     * @return BigDecimal return the donativoDespCongrLocalRecDash
      */
-    public Float getDonativoDespCongrLocalRecDash() {
+    public BigDecimal getDonativoDespCongrLocalRecDash() {
         return donativoDespCongrLocalRecDash;
     }
 
     /**
      * @param donativoDespCongrLocalRecDash the donativoDespCongrLocalRecDash to set
      */
-    public void setDonativoDespCongrLocalRecDash(Float donativoDespCongrLocalRecDash) {
+    public void setDonativoDespCongrLocalRecDash(BigDecimal donativoDespCongrLocalRecDash) {
         this.donativoDespCongrLocalRecDash = donativoDespCongrLocalRecDash;
     }
 
     /**
-     * @return Float return the arranjoDeOnibus
+     * @return BigDecimal return the arranjoDeOnibus
      */
-    public Float getArranjoDeOnibus() {
+    public BigDecimal getArranjoDeOnibus() {
         return arranjoDeOnibus;
     }
 
     /**
      * @param arranjoDeOnibus the arranjoDeOnibus to set
      */
-    public void setArranjoDeOnibus(Float arranjoDeOnibus) {
+    public void setArranjoDeOnibus(BigDecimal arranjoDeOnibus) {
         this.arranjoDeOnibus = arranjoDeOnibus;
     }
 

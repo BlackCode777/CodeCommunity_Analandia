@@ -419,24 +419,7 @@ Funções existentes no código do componente CadastroAdicionarIndicadorComponen
 4) removerConsultaValor(index: number): Método que remove uma consulta de valor da lista consultasValor.
 5) adicionarConsultaCor(): Método que adiciona uma nova consulta de cor à lista consultasCor.
 
-6) removerConsultaCor(index: number, consulta: CalculoCores): Método que remove uma consulta de cor da lista consultasCor.
-7) SetarRegraPadrao(consulta: CalculoCores): Método que seta a regra padrão para uma consulta de cor.
-8) SetarRegraDoValorDasFormula(consulta: CalculoCores): Método que seta a regra de retorno da fórmula para uma consulta de cor.
-9) CancelarRegraDoValorDasFormula(consulta: CalculoCores): Método que cancela a regra de retorno da fórmula para uma consulta de cor.
-10) CancelarRegraPadrao(consulta: CalculoCores): Método que cancela a regra padrão para uma consulta de cor.
-11) mostrarBotaoPreencherAutomaticamente(): Método que verifica se deve mostrar o botão de preencher automaticamente.
-12) mostrarBotaoPreencherAutomaticamente2(): Método que verifica se deve mostrar o botão de preencher automaticamente 2.
-13) SeTiverAlgoEscrito(consulta: CalculoCores): Método que verifica se há algo escrito em uma consulta de cor.
-14) submitForm(): Método que submete o formulário de adicionar um novo item.
-15) Limpar(): Método que limpa o formulário de adicionar um novo item.
-16) handleInputChange(event: any): Método que trata a mudança de input.
-17) onOptionChange(newValue: string): Método que trata a mudança de opção.
-18) getCalculoCorIndicadorEtapa1(): Método que obtém o cálculo de cor do indicador na etapa 1.
-19) verificarExistenciaDoCodigo(codigo: number): Método que verifica a existência de um código.
-20) mudarMultiConsultaValor(novoValor: boolean): Método que muda a consulta de valor múltipla.
-21) obterMaiorCodigo(): Método que obtém o maior código.
-22) AbrirEditarItem(id: string | null): Método que abre a edição de um item.
-23) mostrarCampoValorNocabecalho(): Método que mostra o campo de valor no cabeçalho.
+
 
 Essas são as funções existentes no código do componente CadastroAdicionarIndicadorComponent. 
 Cada função executa uma ação específica no componente, como adicionar ou remover consultas, 
@@ -488,22 +471,7 @@ describe('CadastroAdicionarIndicadorComponent', () => {
 "Teste unitário 3: Deve adicionar uma nova consulta de cor à lista consultasCor."
 "Teste unitário 4: Deve remover uma consulta de cor da lista consultasCor."
 "Teste unitário 5: Deve setar a regra padrão para uma consulta de cor."
-"Teste unitário 6: Deve setar a regra de retorno da fórmula para uma consulta de cor."
-"Teste unitário 7: Deve cancelar a regra de retorno da fórmula para uma consulta de cor."
-"Teste unitário 8: Deve cancelar a regra padrão para uma consulta de cor."
-"Teste unitário 9: Deve verificar se deve mostrar o botão de preencher automaticamente."
-"Teste unitário 10: Deve verificar se deve mostrar o botão de preencher automaticamente 2."
-"Teste unitário 11: Deve verificar se há algo escrito em uma consulta de cor."
-"Teste unitário 12: Deve submeter o formulário de adicionar um novo item."
-"Teste unitário 13: Deve limpar o formulário de adicionar um novo item."
-"Teste unitário 14: Deve tratar a mudança de input."
-"Teste unitário 15: Deve tratar a mudança de opção."
-"Teste unitário 16: Deve obter o cálculo de cor do indicador na etapa 1."
-"Teste unitário 17: Deve verificar a existência de um código."
-"Teste unitário 18: Deve mudar a consulta de valor múltipla."
-"Teste unitário 19: Deve obter o maior código."
-"Teste unitário 20: Deve abrir a edição de um item."
-"Teste unitário 21: Deve mostrar o campo de valor no cabeçalho."
+
 
 Esses são os casos de teste para cada função existente no código do componente CadastroAdicionarIndicadorComponent.
 Cada teste verifica se a função executa corretamente a ação esperada, garantindo o correto funcionamento do componente.
@@ -608,6 +576,8 @@ describe("CadastroAdicionarIndicadorComponent", () => {
         expect(component.consultasCor[0].consulta).toBe("");
     });
 
+
+
     [[
         nesta função de teste eu recebi este erro "TypeError: Cannot set properties of undefined (setting 'nome')",
         o que significa que a variável consulta é undefined, então eu preciso corrigir isso para que o teste funcione corretamente.
@@ -707,7 +677,874 @@ describe("CadastroAdicionarIndicadorComponent", () => {
         }); 
         copilot achei o erro, o erro esta neste trecho de código ".toBeUndefined();", pois estava retornando "undefined"
         e a expectativa era retornar um "0".
-        a caso de teste para o teste 5) está - OK. ]]
+        a caso de teste para o teste 5) está - OK. 
+        
+        Para esta função " removerConsultaCor(index: number, consulta: CalculoCores) {
+          if(consulta.nome == 'Regra de Valor' || consulta.nome == 'Regra de Retorno da Formula' )
+          {
+            this.EhCalculoCorPadrao = false;
+            this.JaSetouCalculoFormula = false;
+          }
+          this.consultasCor.splice(index, 1);
+        }" crie o caso de teste com este requisito "removerConsultaCor(index: number, consulta: CalculoCores): Método que remove uma consulta de cor da lista consultasCor"
+
+          it("removerConsultaCor(index: number, consulta: CalculoCores): Método que remove uma consulta de cor da lista consultasCor", () => {
+              // Adiciona uma nova consulta de cor
+              component.adicionarConsultaCor();
+
+              // Cria uma consulta de cor com os valores corretos
+              const consulta = {
+                  nome: 'Regra de Valor',
+                  indice: '',
+                  consulta: '{"regras": [{"intervalo": "NumeroMaior-NumeroMenor","cor": "Verde"}]}',
+                  tipoResultado: 0
+              };
+
+              // Chama o método SetarRegraPadrao com a consulta criada
+              component.SetarRegraPadrao(consulta);
+
+              // Verifica o comprimento da lista de consultas de cor após a chamada do método
+              const lengthBefore = component.consultasCor.length;
+
+              // Chama o método removerConsultaCor para remover a consulta de cor
+              component.removerConsultaCor(0, component.consultasCor[0]);
+
+              // Verifica o comprimento da lista de consultas de cor após a remoção
+              const lengthAfter = component.consultasCor.length;
+              expect(lengthAfter).toBe(lengthBefore - 1);
+
+              // Verifica se EhCalculoCorPadrao e JaSetouCalculoFormula são definidos como false
+              expect(component.EhCalculoCorPadrao).toBe(false);
+              expect(component.JaSetouCalculoFormula).toBe(false);
+          });
+
+          "Agora copilot para esta função 'SetarRegraPadrao(consulta: CalculoCores) {
+            this.EhCalculoCorPadrao = true;
+            consulta.nome = 'Regra de Valor';
+            consulta.indice = "";
+            consulta.tipoResultado = 0;
+        
+            consulta.consulta = this.CalculoCorValorPadrao;
+          }', crie um caso de teste para atender a este requisito 'Método que seta a regra padrão para uma consulta de cor'"
+
+          it("7) - [Indicadores] - SetarRegraPadrao(consulta: CalculoCores): Método que seta a regra padrão para uma consulta de cor.", () => {
+              // Adiciona uma nova consulta de cor
+              component.adicionarConsultaCor();
+
+              // Cria uma consulta de cor com os valores corretos
+              const consulta = {
+                  nome: 'Regra de Valor',
+                  indice: '',
+                  consulta: '{"regras": [{"intervalo": "NumeroMaior-NumeroMenor","cor": "Verde"}]}',
+                  tipoResultado: 0
+              };
+
+              // Chama o método SetarRegraPadrao com a consulta criada
+              component.SetarRegraPadrao(consulta);
+
+              // Verifica se EhCalculoCorPadrao é definido como true
+              expect(component.EhCalculoCorPadrao).toBe(true);
+
+              // Verifica se os valores da consulta de cor são definidos corretamente
+              if (component.consultasCor[0]) {
+                  expect(component.consultasCor[0].nome).toBe("Regra de Valor");
+                  expect(component.consultasCor[0].indice).toBe("");
+                  expect(component.consultasCor[0].tipoResultado).toBe(0);
+                  expect(component.consultasCor[0].consulta).toBe(component.CalculoCorValorPadrao);
+              }
+          }); OK, funcionou corretamente.
+
+          "para esta função de teste unitario 'SetarRegraDoValorDasFormula(consulta: CalculoCores) {
+            consulta.nome = 'Regra de Retorno da Formula';
+            consulta.indice = "";
+            consulta.tipoResultado = 0;
+            if (!this.EhEtapa1)
+              consulta.consulta = this.CalculoCorFormulaPadrao;
+            else
+              consulta.consulta = this.CalculoCorValorPadrao;
+            this.JaSetouCalculoFormula = true;
+          }', crie um teste para atender a este requisito 'Método que seta a regra de retorno da fórmula para uma consulta de cor.'"
+          it("8) - [Indicadores] - SetarRegraDoValorDasFormula(consulta: CalculoCores) Método que seta a regra de retorno da fórmula para uma consulta de cor.", () => {
+              // Adiciona uma nova consulta de cor
+              component.adicionarConsultaCor();
+
+              // Cria uma consulta de cor com os valores corretos
+              const consulta = {
+                  nome: 'Regra de Retorno da Formula',
+                  indice: '',
+                  consulta: '{"regras": [{"intervalo": "NumeroMaior-NumeroMenor","cor": "Verde"}]}',
+                  tipoResultado: 0
+              };
+
+              // Chama o método SetarRegraDoValorDasFormula com a consulta criada
+              component.SetarRegraDoValorDasFormula(consulta);
+
+              // Verifica se JaSetouCalculoFormula é definido como true
+              expect(component.JaSetouCalculoFormula).toBe(true);
+
+              // Verifica se os valores da consulta de cor são definidos corretamente
+              if (component.consultasCor[0]) {
+                  expect(component.consultasCor[0].nome).toBe("Regra de Retorno da Formula");
+                  expect(component.consultasCor[0].indice).toBe("");
+                  expect(component.consultasCor[0].tipoResultado).toBe(0);
+                  expect(component.consultasCor[0].consulta).toBe(component.CalculoCorValorPadrao);
+              }
+          }); OK, funcionou corretamente.
+
+
+          "para esta função 'CancelarRegraDoValorDasFormula(consulta: CalculoCores) {
+                this.JaSetouCalculoFormula = true;
+                consulta.nome = "";
+                consulta.indice = "";
+                consulta.consulta = "";
+              }', crie um teste unitário para atender a este requisito 'Método que cancela a regra de retorno da fórmula para uma consulta de cor.'"
+
+          it("9) - [Indicadores] - CancelarRegraDoValorDasFormula(consulta: CalculoCores) Método que cancela a regra de retorno da fórmula para uma consulta de cor.", () => {
+              // Adiciona uma nova consulta de cor
+              component.adicionarConsultaCor();
+
+              // Cria uma consulta de cor com os valores corretos
+              const consulta = {
+                  nome: 'Regra de Retorno da Formula',
+                  indice: '',
+                  consulta: '{"regras": [{"intervalo": "NumeroMaior-NumeroMenor","cor": "Verde"}]}',
+                  tipoResultado: 0
+              };
+
+              // Chama o método SetarRegraDoValorDasFormula com a consulta criada
+              component.SetarRegraDoValorDasFormula(consulta);
+
+              // Verifica se JaSetouCalculoFormula é definido como true
+              expect(component.JaSetouCalculoFormula).toBe(true);
+
+              // Chama o método CancelarRegraDoValorDasFormula com a consulta criada
+              component.CancelarRegraDoValorDasFormula(consulta);
+
+              // Verifica se JaSetouCalculoFormula é definido como false
+              expect(component.JaSetouCalculoFormula).toBe(false);
+
+              // Verifica se os valores da consulta de cor são redefinidos corretamente
+              if (component.consultasCor[0]) {
+                  expect(component.consultasCor[0].nome).toBe("");
+                  expect(component.consultasCor[0].indice).toBe("");
+                  expect(component.consultasCor[0].consulta).toBe("");
+              }
+          }); OK, funcionou corretamente.
+
+          "Agora para esta função 'CancelarRegraPadrao(consulta: CalculoCores) {
+            this.EhCalculoCorPadrao = false;
+            consulta.nome = "";
+            consulta.indice = "";
+            consulta.tipoResultado = 0;
+            consulta.consulta = "";
+          }', crie um caso de teste para este requisito 'CancelarRegraPadrao(consulta: CalculoCores): Método que cancela a regra padrão para uma consulta de cor.'"
+
+          it("10) - [Indicadores] - CancelarRegraPadrao(consulta: CalculoCores) Método que cancela a regra padrão para uma consulta de cor.", () => {
+              // Adiciona uma nova consulta de cor
+              component.adicionarConsultaCor();
+
+              // Cria uma consulta de cor com os valores corretos
+              const consulta = {
+                  nome: 'Regra de Valor',
+                  indice: '',
+                  consulta: '{"regras": [{"intervalo": "NumeroMaior-NumeroMenor","cor": "Verde"}]}',
+                  tipoResultado: 0
+              };
+
+              // Chama o método SetarRegraPadrao com a consulta criada
+              component.SetarRegraPadrao(consulta);
+
+              // Verifica se EhCalculoCorPadrao é definido como true
+              expect(component.EhCalculoCorPadrao).toBe(true);
+
+              // Chama o método CancelarRegraPadrao com a consulta criada
+              component.CancelarRegraPadrao(consulta);
+
+              // Verifica se EhCalculoCorPadrao é definido como false
+              expect(component.EhCalculoCorPadrao).toBe(false);
+
+              // Verifica se os valores da consulta de cor são redefinidos corretamente
+              if (component.consultasCor[0]) {
+                  expect(component.consultasCor[0].nome).toBe("");
+                  expect(component.consultasCor[0].indice).toBe("");
+                  expect(component.consultasCor[0].tipoResultado).toBe(0);
+                  expect(component.consultasCor[0].consulta).toBe("");
+              }
+          }); OK, funcionou corretamente.
+
+          " estou recebendo este erro 
+          'Expected '{"corDefault":"wewewee","corDefaultDenominador":"wewewee1","corDefaultNominador":"wewewee12",
+          "corDefaultZero":"zero","ordenacaoOrientacao":"ordenacaoOrientacao","linkRedirect":"http//:link","nomeTipoTela":"tipoTela",
+          "id":"1","etapa":1,"codigo":1,"descricao":"Descrição do Indicador","proximaEtapa":1,"tempoAtualizacao":1,"nome":"Indicador_1",
+          "icone":"icone1","consulta":"consulta1","parametro":"param1","colecao":"colecao","versaoIndice":"um","abreviatura":"abv",
+          "formula":"A+B+C","calculoCores":[{"nome":"","indice":"","consulta":""}],"formulaValor":"ABC_valor",
+          "multiplasConsultas":[{"nome":"","indice":"","consulta":""}],"tipoResultado":1,"valoresPorcentagemCabecalho":false}' 
+
+          to be '{"id":"1","codigo":1,"etapa":1,"proximaEtapa":1,"tipoResultado":1,"nome":"Indicador_1","descricao":"Descrição do Indicador",
+          "tempoAtualizacao":1,"icone":"icone1","consulta":"consulta1","parametro":"param1","colecao":"colecao","versaoIndice":"um","abreviatura":"abv",
+          "formula":"A+B+C","formulaValor":"ABC_valor","valoresPorcentagemCabecalho":false,"multiplasConsultas":[{"nome":"","indice":"","consulta":""}],
+          "calculoCores":[{"nome":"","indice":"","consulta":""}],"corDefault":"wewewee","corDefaultDenominador":"wewewee1","corDefaultNominador":"wewewee12",
+          "corDefaultZero":"zero","ordenacaoOrientacao":"ordenacaoOrientacao","linkRedirect":"http//:link","nomeTipoTela":"tipoTela"}'.' 
+          
+          nesta configuração de teste unitário
+          [
+            it("14) - [Indicadores] - submitForm(): Método que submete o formulário de adicionar um novo item", () => {
+                // Adiciona uma nova consulta de cor
+                component.adicionarConsultaCor();
+                component.adicionarConsultaValor();
+                component.novoItem.id = "1";
+                component.novoItem.codigo = 1;
+                component.novoItem.etapa = 1;
+                component.novoItem.proximaEtapa = 1;
+                component.novoItem.tipoResultado = 1;
+                component.novoItem.nome = "Indicador_1";
+                component.novoItem.descricao = "Descrição do Indicador";
+                component.novoItem.tempoAtualizacao = 1;
+                component.novoItem.icone = "icone1";
+                component.novoItem.consulta = "consulta1";
+                component.novoItem.parametro = "param1";
+                component.novoItem.colecao = "colecao";
+                component.novoItem.versaoIndice = "um";
+                component.novoItem.abreviatura = "abv";
+                component.novoItem.formula = "A+B+C";
+                component.novoItem.formulaValor = "ABC_valor";
+                component.novoItem.valoresPorcentagemCabecalho = false;
+                component.novoItem.multiplasConsultas = [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ];
+                component.novoItem.calculoCores = [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ];
+                component.novoItem.corDefault = "wewewee";
+                component.novoItem.corDefaultDenominador = "wewewee1";
+                component.novoItem.corDefaultNominador = "wewewee12";
+                component.novoItem.corDefaultZero = "zero";
+                component.novoItem.ordenacaoOrientacao = "ordenacaoOrientacao";
+                component.novoItem.linkRedirect = "http//:link";
+                component.novoItem.nomeTipoTela = "tipoTela";
+                component.submitForm();
+                console.log(" ****_OBJETO_**** ",component.submitForm())
+                const expectedNovoItem = {
+                    id : "1",
+                    codigo : 1,
+                    etapa : 1,
+                    proximaEtapa : 1,
+                    tipoResultado : 1,
+                    nome : "Indicador_1",
+                    descricao : "Descrição do Indicador",
+                    tempoAtualizacao : 1,
+                    icone : "icone1",
+                    consulta : "consulta1",
+                    parametro : "param1",
+                    colecao : "colecao",
+                    versaoIndice : "um",
+                    abreviatura : "abv",
+                    formula : "A+B+C",
+                    formulaValor : "ABC_valor",
+                    valoresPorcentagemCabecalho : false,
+                    multiplasConsultas : [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ],
+                    calculoCores : [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ],
+                    corDefault : "wewewee",
+                    corDefaultDenominador : "wewewee1",
+                    corDefaultNominador : "wewewee12",
+                    corDefaultZero : "zero",
+                    ordenacaoOrientacao : "ordenacaoOrientacao",
+                    linkRedirect : "http//:link",
+                    nomeTipoTela : "tipoTela",
+                };
+        
+                if (!deepEqual(component.novoItem, expectedNovoItem)) {
+                    console.log("Objeto real:", JSON.stringify(component.novoItem, null, 2));
+                    console.log("Objeto esperado:", JSON.stringify(expectedNovoItem, null, 2));
+                }
+        
+                // Verifica se o novo item foi adicionado com sucesso
+                //expect(JSON.stringify(component.novoItem)).toBe(JSON.stringify(expectedNovoItem));
+                expect(deepEqual(component.novoItem, expectedNovoItem)).toBe(true, "Os objetos não são iguais");
+                expect(component.EhEtapa1).toBe(true);
+                component.Limpar();
+        
+            });
+          ], corrija a expectativa para que o teste funcione corretamente. De a resposta completa, por favor.
+
+          Para corrigir o teste, você precisa ajustar a expectativa para comparar os objetos de forma mais precisa.
+          Em vez de usar JSON.stringify para comparar os objetos, você pode usar uma função de comparação profunda, como deepEqual,          
+          para verificar se os objetos são iguais. Aqui está um exemplo de como você pode corrigir a expectativa no teste:
+
+          it("14) - [Indicadores] - submitForm(): Método que submete o formulário de adicionar um novo item", () => {
+              // Adiciona uma nova consulta de cor
+              component.adicionarConsultaCor();
+              component.adicionarConsultaValor();
+              component.novoItem.id = "1";
+              component.novoItem.codigo = 1;
+              component.novoItem.etapa = 1;
+              component.novoItem.proximaEtapa = 1;
+              component.novoItem.tipoResultado = 1;
+              component.novoItem.nome = "Indicador_1";
+              component.novoItem.descricao = "Descrição do Indicador";
+              component.novoItem.tempoAtualizacao = 1;
+              component.novoItem.icone = "icone1";
+              component.novoItem.consulta = "consulta1";
+              component.novoItem.parametro = "param1";
+              component.novoItem.colecao = "colecao";
+              component.novoItem.versaoIndice = "um";
+              component.novoItem.abreviatura = "abv";
+              component.novoItem.formula = "A+B+C";
+              component.novoItem.formulaValor = "ABC_valor";
+              component.novoItem.valoresPorcentagemCabecalho = false;
+              component.novoItem.multiplasConsultas = [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ];
+              component.novoItem.calculoCores = [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ];
+              component.novoItem.corDefault = "wewewee";
+              component.novoItem.corDefaultDenominador = "wewewee1";
+              component.novoItem.corDefaultNominador = "wewewee12";
+              component.novoItem.corDefaultZero = "zero";
+              component.novoItem.ordenacaoOrientacao = "ordenacaoOrientacao";
+              component.novoItem.linkRedirect = "http//:link";
+              component.novoItem.nomeTipoTela = "tipoTela";
+              component.submitForm();
+              console.log(" ****_OBJETO_**** ",component.submitForm())
+              const expectedNovoItem = {
+                  id : "1",
+                  codigo : 1,
+                  etapa : 1, 
+                  proximaEtapa : 1,
+                  tipoResultado : 1,
+                  nome : "Indicador_1",
+                  descricao : "Descrição do Indicador",
+                  tempoAtualizacao : 1,
+                  icone : "icone1",
+                  consulta : "consulta1",
+                  parametro : "param1",
+                  colecao : "colecao",
+                  versaoIndice : "um",
+                  abreviatura : "abv",
+                  formula : "A+B+C",
+                  formulaValor : "ABC_valor",
+                  valoresPorcentagemCabecalho : false,
+                  multiplasConsultas : [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ],
+                  calculoCores : [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ],
+                  corDefault : "wewewee",
+                  corDefaultDenominador : "wewewee1",
+                  corDefaultNominador : "wewewee12",
+                  corDefaultZero : "zero",
+                  ordenacaoOrientacao : "ordenacaoOrientacao",
+                  linkRedirect : "http//:link",
+                  nomeTipoTela : "tipoTela",
+              };
+
+              if (!deepEqual(component.novoItem, expectedNovoItem)) {
+                  console.log("Objeto real:", JSON.stringify(component.novoItem, null, 2));
+                  console.log("Objeto esperado:", JSON.stringify(expectedNovoItem, null, 2));
+              }
+
+              // Verifica se o novo item foi adicionado com sucesso
+              expect(JSON.stringify(component.novoItem)).toBe(JSON.stringify(expectedNovoItem));
+              //expect(deepEqual(component.novoItem, expectedNovoItem)).toBe(true, "Os objetos não são iguais");
+              expect(component.EhEtapa1).toBe(true);
+              component.Limpar();
+
+          });
+          erro ainda persiste "Expected '{"corDefault":"wewewee","corDefaultDenominador":"wewewee1","corDefaultNominador":"wewewee12","corDefaultZero":"zero","ordenacaoOrientacao":"ordenacaoOrientacao","linkRedirect":"http//:link","nomeTipoTela":"tipoTela","id":"1","etapa":1,"codigo":1,"descricao":"Descrição do Indicador","proximaEtapa":1,"tempoAtualizacao":1,"nome":"Indicador_1","icone":"icone1","consulta":"consulta1","parametro":"param1","colecao":"colecao","versaoIndice":"um","abreviatura":"abv","formula":"A+B+C","calculoCores":[{"nome":"","indice":"","consulta":""}],"formulaValor":"ABC_valor","multiplasConsultas":[{"nome":"","indice":"","consulta":""}],"tipoResultado":1,"valoresPorcentagemCabecalho":false}' to equal '{"id":"1","codigo":1,"etapa":1,"proximaEtapa":1,"tipoResultado":1,"nome":"Indicador_1","descricao":"Descrição do Indicador","tempoAtualizacao":1,"icone":"icone1","consulta":"consulta1","parametro":"param1","colecao":"colecao","versaoIndice":"um","abreviatura":"abv","formula":"A+B+C","formulaValor":"ABC_valor","valoresPorcentagemCabecalho":false,"multiplasConsultas":[{"nome":"","indice":"","consulta":""}],"calculoCores":[{"nome":"","indice":"","consulta":""}],"corDefault":"wewewee","corDefaultDenominador":"wewewee1","corDefaultNominador":"wewewee12","corDefaultZero":"zero","ordenacaoOrientacao":"ordenacaoOrientacao","linkRedirect":"http//:link","nomeTipoTela":"tipoTela"}'."
+
+        
+
+        [[[
+
+            Para esta função 
+            'Limpar() {
+              this.novoItem = new indicador();
+              this.consultasCor = [];
+              this.consultasValor = [];
+              this.EhEtapa1 = false;
+              this.EhCalculoCorPadrao = false;
+              this.JaSetouCalculoFormula = false;
+              this.EhMultiConsultaValor = false;
+              this.EhPorcentagem = false;
+            }'
+             crie um caso de testes para atender a este requisito '15) Limpar(): Método que limpa o formulário de adicionar um novo item.'
+
+             it( "15) - [Indicadores] - Limpar(): Método que limpa o formulário de adicionar um novo item.", () => {
+                // Adiciona uma nova consulta de cor
+                component.adicionarConsultaCor();
+                component.adicionarConsultaValor();
+                component.novoItem.id = "1";
+                component.novoItem.codigo = 1;
+                component.novoItem.etapa = 1;
+                component.novoItem.proximaEtapa = 1;
+                component.novoItem.tipoResultado = 1;
+                component.novoItem.nome = "Indicador_1";
+                component.novoItem.descricao = "Descrição do Indicador";
+                component.novoItem.tempoAtualizacao = 1;
+                component.novoItem.icone = "icone1";
+                component.novoItem.consulta = "consulta1";
+                component.novoItem.parametro = "param1";
+                component.novoItem.colecao = "colecao";
+                component.novoItem.versaoIndice = "um";
+                component.novoItem.abreviatura = "abv";
+                component.novoItem.formula = "A+B+C";
+                component.novoItem.formulaValor = "ABC_valor";
+                component.novoItem.valoresPorcentagemCabecalho = false;
+                component.novoItem.multiplasConsultas = [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ];
+                component.novoItem.calculoCores = [ { nome: 'nome1', indice: 'indice1', consulta: 'consulta1', tipoResultado: undefined } ];
+                component.novoItem.corDefault = "wewewee";
+                component.novoItem.corDefaultDenominador = "wewewee1";
+                component.novoItem.corDefaultNominador = "wewewee12";
+                component.novoItem.corDefaultZero = "zero";
+                component.novoItem.ordenacaoOrientacao = "ordenacaoOrientacao";
+                component.novoItem.linkRedirect = "http//:link";
+                component.novoItem.nomeTipoTela = "tipoTela";
+                component.Limpar();
+                expect(component.novoItem).toEqual(new indicador());
+                expect(component.consultasCor).toEqual([]);
+                expect(component.consultasValor).toEqual([]);
+                expect(component.EhEtapa1).toBe(false);
+                expect(component.EhCalculoCorPadrao).toBe(false);
+                expect(component.JaSetouCalculoFormula).toBe(false);
+                expect(component.EhMultiConsultaValor).toBe(false);
+                expect(component.EhPorcentagem).toBe(false);
+            });
+        ]]], gpt ajustei o teste para esta configuração:
+        'it("15) - [Indicadores] - Limpar(): Método que limpa o formulário de adicionar um novo item.", () => {
+            // Chama o método Limpar
+            component.Limpar();
+    
+            // Verifica se os valores foram resetados
+            expect(component.novoItem).toEqual(new indicador());
+            expect(component.consultasCor).toEqual([]);
+            expect(component.consultasValor).toEqual([]);
+            expect(component.EhEtapa1).toBe(false);
+            expect(component.EhCalculoCorPadrao).toBe(false);
+            expect(component.JaSetouCalculoFormula).toBe(false);
+            expect(component.EhMultiConsultaValor).toBe(false);
+            expect(component.EhPorcentagem).toBe(false);
+        });', e funcionou bem melhor!  Tente manter os teste de forma mais susinta e objetiva, 
+        para que possa ser mais facil de entender e manter. Mas obrigado pela sugestão!
+        Vamos para o próximo caso de teste.
+
+        [[[
+          para esta função 
+          'handleInputChange(event: any) {
+                const inputValue = event.target.value;
+                if (inputValue == 1) {
+                  this.EhEtapa1 = true;
+                  this.EhCalculoCorPadrao = false;
+                  this.JaSetouCalculoFormula= false;
+                  this.consultasCor = [];
+                  this.novoItem.codigo = this.obterMaiorCodigo() + 1;
+                }
+                else
+                  this.EhEtapa1 = false;
+              }' 
+
+          crie um caso de teste com este requisito 
+          '16) handleInputChange(event: any): Método que trata a mudança de input.'
+
+                      it("16) - [Indicadores] - handleInputChange(event: any): Método que trata a mudança de input.", () => {
+                          // Cria um evento simulado
+                          const event = { target: { value: 1 } };
+                
+                          // Chama o método handleInputChange com o evento criado
+                          component.handleInputChange(event);
+                
+                          // Verifica se os valores foram definidos corretamente
+                          expect(component.EhEtapa1).toBe(true);
+                          expect(component.EhCalculoCorPadrao).toBe(false);
+                          expect(component.JaSetouCalculoFormula).toBe(false);
+                          expect(component.consultasCor).toEqual([]);
+                          expect(component.novoItem.codigo).toBe(component.obterMaiorCodigo() + 1);
+                
+                          // Cria um novo evento simulado
+                          const event2 = { target: { value: 0 } };
+                
+                          // Chama o método handleInputChange com o novo evento criado
+                          component.handleInputChange(event2);
+                
+                          // Verifica se os valores foram redefinidos corretamente
+                          expect(component.EhEtapa1).toBe(false);
+                      });
+        ]]],
+
+        [[[
+          Para esta função
+          'onOptionChange(newValue: string) {
+            console.log(newValue);
+            let IndicadorSelecionado = this.listaInd.find(x => x.codigo == Number.parseInt(newValue))
+            this.novoItem.codigo = IndicadorSelecionado?.codigo;
+            this.novoItem.nome = IndicadorSelecionado?.nome == undefined ? "" : IndicadorSelecionado?.nome;
+            this.novoItem.descricao = IndicadorSelecionado?.descricao == undefined ? "" : IndicadorSelecionado?.descricao;
+            this.novoItem.icone = IndicadorSelecionado?.icone == undefined ? "" : IndicadorSelecionado?.icone;
+            this.novoItem.tempoAtualizacao = IndicadorSelecionado?.tempoAtualizacao;
+            this.novoItem.abreviatura = IndicadorSelecionado?.abreviatura == undefined ? "" : IndicadorSelecionado?.abreviatura;
+            this.novoItem.parametro = IndicadorSelecionado?.parametro == undefined ? "" : IndicadorSelecionado?.parametro;
+            this.novoItem.formulaValor = IndicadorSelecionado?.formulaValor == undefined ? "" : IndicadorSelecionado?.formulaValor;
+            this.novoItem.colecao = IndicadorSelecionado?.colecao == undefined ? "" : IndicadorSelecionado?.colecao;
+            this.novoItem.corDefault = IndicadorSelecionado?.corDefault == undefined ? "Cinza" : IndicadorSelecionado?.corDefault;
+            this.novoItem.corDefaultDenominador = IndicadorSelecionado?.corDefaultDenominador == undefined ? "" : IndicadorSelecionado?.corDefaultDenominador;
+            this.novoItem.corDefaultZero = IndicadorSelecionado?.corDefaultZero == undefined ? "" : IndicadorSelecionado?.corDefaultZero;
+            this.novoItem.ordenacaoOrientacao = IndicadorSelecionado?.ordenacaoOrientacao == undefined ? "" : IndicadorSelecionado?.ordenacaoOrientacao;
+            this.mySelectOrdem.nativeElement.value = '' + this.novoItem.ordenacaoOrientacao;
+          }', crie um caso de teste para atender a este requisito '17) onOptionChange(newValue: string): Método que trata a mudança de opção.'
+
+
+                    
+it("17) - [Indicadores] - onOptionChange(newValue: string): Método que trata a mudança de opção.", () => {
+              // Cria um novo valor simulado
+              const newValue = "1";
+
+              // Chama o método onOptionChange com o novo valor criado
+              component.onOptionChange(newValue);
+
+              // Verifica se os valores foram definidos corretamente
+              expect(component.novoItem.codigo).toBe(1);
+              expect(component.novoItem.nome).toBe("Indicador_1");
+              expect(component.novoItem.descricao).toBe("Descrição do Indicador");
+              expect(component.novoItem.icone).toBe("icone1");
+              expect(component.novoItem.tempoAtualizacao).toBe(1);
+              expect(component.novoItem.abreviatura).toBe("abv");
+              expect(component.novoItem.parametro).toBe("param1");
+              expect(component.novoItem.formulaValor).toBe("ABC_valor");
+              expect(component.novoItem.colecao).toBe("colecao");
+              expect(component.novoItem.corDefault).toBe("wewewee");
+              expect(component.novoItem.corDefaultDenominador).toBe("wewewee1");
+              expect(component.novoItem.corDefaultZero).toBe("zero");
+              expect(component.novoItem.ordenacaoOrientacao).toBe("ordenacaoOrientacao");
+              expect(component.mySelectOrdem.nativeElement.value).toBe('ordenacaoOrientacao');
+          });
+        ]]]
+
+        [[[
+          Para esta função
+          'getCalculoCorIndicadorEtapa1() {
+            this.consultasCor = [];
+            let IndicadorSelecionado = this.listaInd.find(x => x.codigo == this.novoItem.codigo)
+            console.log(IndicadorSelecionado);
+            IndicadorSelecionado?.calculoCores?.forEach(c => {
+              if (c.nome == "Regra de Valor") {
+                this.EhCalculoCorPadrao = true;
+              }
+              if (c.nome == "Regra de Retorno da Formula") {
+                this.JaSetouCalculoFormula = true;
+              }
+              this.consultasCor.push(new CalculoCores(
+                c.nome,
+                c.consulta,
+                c.indice,
+                c.tipoResultado)
+              )
+            });
+          }', crie um casos de teste para atender a este requisito 
+          '18) getCalculoCorIndicadorEtapa1(): Método que obtém o cálculo de cor do indicador na etapa 1.'
+
+
+          it("18) - [Indicadores] - getCalculoCorIndicadorEtapa1(): Método que obtém o cálculo de cor do indicador na etapa 1.", () => {
+              // Adiciona uma nova consulta de cor
+              component.adicionarConsultaCor();
+
+              // Cria um novo item simulado
+              component.novoItem.codigo = 1;
+
+              // Chama o método getCalculoCorIndicadorEtapa1
+              component.getCalculoCorIndicadorEtapa1();
+
+              // Verifica se os valores foram definidos corretamente
+              expect(component.EhCalculoCorPadrao).toBe(true);
+              expect(component.JaSetouCalculoFormula).toBe(true);
+              expect(component.consultasCor).toEqual([new CalculoCores("Regra de Valor", "", "", undefined)]);
+          });
+        ]]]
+
+        [[[ 
+          Para esta função
+          'verificarExistenciaDoCodigo(codigo: number): boolean {
+            return this.listaInd.some(objeto => objeto.codigo === codigo);
+          }', escreva um caso teste para atender a este requisito
+          '19) verificarExistenciaDoCodigo(codigo: number): Método que verifica a existência de um código.'
+
+          it("19) - [Indicadores] - verificarExistenciaDoCodigo(codigo: number): Método que verifica a existência de um código.", () => {
+              // Adiciona um novo item simulado
+              component.listaInd = [{ codigo: 1 }, { codigo: 2 }, { codigo: 3 }];
+
+              // Chama o método verificarExistenciaDoCodigo com um código existente
+              const result1 = component.verificarExistenciaDoCodigo(1);
+
+              // Verifica se o código existe
+              expect(result1).toBe(true);
+
+              // Chama o método verificarExistenciaDoCodigo com um código inexistente
+              const result2 = component.verificarExistenciaDoCodigo(4);
+
+              // Verifica se o código não existe
+              expect(result2).toBe(false);
+          }); ]]]
+
+
+        [[[ 
+          Para esta função 
+          'mudarMultiConsultaValor(novoValor: boolean) {
+            this.EhMultiConsultaValor = novoValor;
+          }', crie um caso de teste para atender a este requisito
+          '20) mudarMultiConsultaValor(novoValor: boolean): Método que muda a consulta de valor múltipla.'
+
+          it("20) - [Indicadores] - mudarMultiConsultaValor(novoValor: boolean): Método que muda a consulta de valor múltipla.", () => {
+              // Chama o método mudarMultiConsultaValor com um novo valor verdadeiro
+              component.mudarMultiConsultaValor(true);
+
+              // Verifica se o valor foi definido corretamente
+              expect(component.EhMultiConsultaValor).toBe(true);
+
+              // Chama o método mudarMultiConsultaValor com um novo valor falso
+              component.mudarMultiConsultaValor(false);
+
+              // Verifica se o valor foi redefinido corretamente
+              expect(component.EhMultiConsultaValor).toBe(false);
+          });]]]
+
+        [[[ 
+          Para esta função
+          'obterMaiorCodigo(): number {
+            let maiorCodigo = -Infinity; // Inicializa com um valor muito baixo
+            for (const objeto of this.listaInd) {
+              if (objeto.codigo != undefined)
+                if (objeto.codigo > maiorCodigo) {
+                  maiorCodigo = objeto.codigo;
+                }
+            }
+            console.log(maiorCodigo)
+            return maiorCodigo;
+          }', crie um caso de teste para atender a este requisito 
+          '21) obterMaiorCodigo(): Método que obtém o maior código.'
+
+          it("21) - [Indicadores] - obterMaiorCodigo(): Método que obtém o maior código.", () => {
+              // Adiciona uma lista de itens simulados
+              component.listaInd = [{ codigo: 1 }, { codigo: 2 }, { codigo: 3 }];
+
+              // Chama o método obterMaiorCodigo
+              const result = component.obterMaiorCodigo();
+
+              // Verifica se o maior código foi obtido corretamente
+              expect(result).toBe(3);
+          });]]]
+
+        ]]]
+
+        [[[ 
+          Para esta função
+          'AbrirEditarItem(id: string | null): void {
+            if (id != undefined) {
+              this.indicadorService.editarItem(id?.toString()).subscribe(
+                (response) => {
+                  let element = response["Indicador"];
+                  console.log("CARREGADO",element);
+                  this.novoItem = new indicador(
+                    element['id'],
+                    element['codigo'],
+                    element['etapa'],
+                    element['proximaEtapa'],
+                    element['tipoResultado'],
+                    element['nome'],
+                    element['descricao'],
+                    element['tempoAtualizacao'],
+                    element['icone'],
+                    element['consulta'],
+                    element['parametro'],
+                    element['colecao'],
+                    element['versaoIndice'],
+                    element['abreviatura'],
+                    element['formula'],
+                    undefined,
+                    element['formulaValor'],
+                    undefined,
+                    element['valoresPorcentagemCabecalho'],
+                    element['corDefault'],
+                    element['corDefaultDenominador'],
+                    element['corDefaultNominador'],
+                    element['corDefaultZero'],
+                    element['ordenacaoOrientacao'],
+                    element['linkRedirect'],
+                    element['nomeTipoTela'])
+        
+                  this.consultasCor = [];
+                  this.consultasValor = [];
+                  this.data = element['calculoCores'];
+                  this.data.forEach(c => {
+                    if (c['nome'] == "Regra de Valor") {
+                      this.EhCalculoCorPadrao = true;
+                    }
+                    if (c['nome'] == "Regra de Retorno da Formula") {
+                      this.JaSetouCalculoFormula = true;
+                    }
+                    this.consultasCor.push(new CalculoCores(
+                      c['nome'],
+                      c['consulta'],
+                      c['indice'],
+                      c['tipoResultado'])
+                    )
+                  });
+        
+                  if (this.novoItem.tipoResultado != undefined && this.listaTipoResultadoPorcentagem.includes(this.novoItem.tipoResultado))
+                    this.EhPorcentagem = true;
+                  else {
+                    this.EhPorcentagem = false;
+                    this.novoItem.valoresPorcentagemCabecalho = false;
+                  }
+        
+                  this.data = element['multiplasConsultas'];
+        
+                  this.data.forEach(c => {
+                    this.EhMultiConsultaValor = true;
+                    this.consultasValor.push(new CalculoCores(
+                      c['nome'],
+                      c['consulta'],
+                      c['indice'],
+                      c['tipoResultado'])
+                    )
+                  });
+        
+                  if (this.novoItem.etapa != 1) {
+                    this.EhEtapa1 = false;
+                    console.log(this.novoItem);
+                    this.mySelectIndicador.nativeElement.value = this.novoItem.codigo;
+                  }
+                },
+                (error) => {
+                  console.error('Erro ao excluir o item:', error);
+                }
+              );
+            }
+          }'
+          crie um caso de teste para atender a este requisito
+          '22) AbrirEditarItem(id: string | null): Método que abre a edição de um item.'
+
+          it("22) - [Indicadores] - AbrirEditarItem(id: string | null): Método que abre a edição de um item.", () => {
+              // Cria um novo id simulado
+              const id = "1";
+
+              // Chama o método AbrirEditarItem com o novo id criado
+              component.AbrirEditarItem(id);
+
+              // Verifica se os valores foram definidos corretamente
+              expect(component.novoItem).toEqual(new indicador(
+                "id",
+                "codigo",
+                "etapa",
+                "proximaEtapa",
+                "tipoResultado",
+                "nome",
+                "descricao",
+                "tempoAtualizacao",
+                "icone",
+                "consulta",
+                "parametro",
+                "colecao",
+                "versaoIndice",
+                "abreviatura",
+                "formula",
+                undefined,
+                "formulaValor",
+                undefined,
+                "valoresPorcentagemCabecalho",
+                "corDefault",
+                "corDefaultDenominador",
+                "corDefaultNominador",
+                "corDefaultZero",
+                "ordenacaoOrientacao",
+                "linkRedirect",
+                "nomeTipoTela"
+              ));
+              expect(component.consultasCor).toEqual([]);
+              expect(component.consultasValor).toEqual([]);
+              expect(component.EhCalculoCorPadrao).toBe(true);
+              expect(component.JaSetouCalculoFormula).toBe(true);
+              expect(component.EhPorcentagem).toBe(true);
+              expect(component.EhMultiConsultaValor).toBe(true);
+              expect(component.EhEtapa1).toBe(false);
+              expect(component.mySelectIndicador.nativeElement.value).toBe("1");
+          });]]]
+
+          [[[ 
+            Para esta função 
+            'mostrarCampoValorNocabecalho(): void {
+              let NumeroEhPorcentagem: number | undefined = undefined;
+              if (this.novoItem.tipoResultado != undefined)
+                NumeroEhPorcentagem = this.listaTipoResultadoPorcentagem.find(x => x == this.novoItem.tipoResultado);
+              if (NumeroEhPorcentagem != undefined)
+                this.EhPorcentagem = true;
+              else {
+                this.EhPorcentagem = false;
+                this.novoItem.valoresPorcentagemCabecalho = false;
+              }
+            }', crie um caso de teste para atender a este requisito
+            '23) mostrarCampoValorNocabecalho(): Método que mostra o campo de valor no cabeçalho.'
+
+            it("23) - [Indicadores] - mostrarCampoValorNocabecalho(): Método que mostra o campo de valor no cabeçalho.", () => {
+                // Chama o método mostrarCampoValorNocabecalho
+                component.mostrarCampoValorNocabecalho();
+
+                // Verifica se o valor foi definido corretamente
+                expect(component.EhPorcentagem).toBe(false);
+                expect(component.novoItem.valoresPorcentagemCabecalho).toBe(false);
+            });]]]
+
+            [[[
+              Para esta função
+              'mostrarBotaoPreencherAutomaticamente(): boolean {
+                return this.novoItem.calculoCores.some(c => c.consulta != undefined && c.consulta != "");
+              }', crie um caso de teste para atender a este requisito
+              '24) mostrarBotaoPreencherAutomaticamente(): Método que verifica se deve mostrar o botão de preencher automaticamente.'
+
+              it("24) - [Indicadores] - mostrarBotaoPreencherAutomaticamente(): Método que verifica se deve mostrar o botão de preencher automaticamente.", () => {
+                  // Adiciona uma nova consulta de cor
+                  component.adicionarConsultaCor();
+
+                  // Chama o método mostrarBotaoPreencherAutomaticamente
+                  const result = component.mostrarBotaoPreencherAutomaticamente();
+
+                  // Verifica se o botão deve ser mostrado
+                  expect(result).toBe(true);
+              });]]]
+
+              [[[
+                Para esta função
+                'mostrarBotaoPreencherAutomaticamente2(): boolean {
+                  return this.novoItem.calculoCores.some(c => c.consulta != undefined && c.consulta != "");
+                }', crie um caso de teste para atender a este requisito
+                '25) mostrarBotaoPreencherAutomaticamente2(): Método que verifica se deve mostrar o botão de preencher automaticamente 2.'
+
+                it("25) - [Indicadores] - mostrarBotaoPreencherAutomaticamente2(): Método que verifica se deve mostrar o botão de preencher automaticamente 2.", () => {
+                    // Adiciona uma nova consulta de cor
+                    component.adicionarConsultaCor();
+
+                    // Chama o método mostrarBotaoPreencherAutomaticamente2
+                    const result = component.mostrarBotaoPreencherAutomaticamente
+
+          ]]]
+
+
+
+
+
+
+
+
+
+
+        });
+
+
+
+11) mostrarBotaoPreencherAutomaticamente(): Método que verifica se deve mostrar o botão de preencher automaticamente.
+12) mostrarBotaoPreencherAutomaticamente2(): Método que verifica se deve mostrar o botão de preencher automaticamente 2.
+13) SeTiverAlgoEscrito(consulta: CalculoCores): Método que verifica se há algo escrito em uma consulta de cor.
+14) submitForm(): Método que submete o formulário de adicionar um novo item.
+15) Limpar(): Método que limpa o formulário de adicionar um novo item.
+16) handleInputChange(event: any): Método que trata a mudança de input.
+17) onOptionChange(newValue: string): Método que trata a mudança de opção.
+18) getCalculoCorIndicadorEtapa1(): Método que obtém o cálculo de cor do indicador na etapa 1.
+19) verificarExistenciaDoCodigo(codigo: number): Método que verifica a existência de um código.
+20) mudarMultiConsultaValor(novoValor: boolean): Método que muda a consulta de valor múltipla.
+21) obterMaiorCodigo(): Método que obtém o maior código.
+22) AbrirEditarItem(id: string | null): Método que abre a edição de um item.
+23) mostrarCampoValorNocabecalho(): Método que mostra o campo de valor no cabeçalho.
+
+
+
+        
 
 
         

@@ -1,20 +1,20 @@
 export class ClasseRecibosDashboard {
-  _id: string;
-  mesReciboDashboard: string;
-  dataReciboDashboard: string; // considerando que pode ser nulo, você pode querer formatar isso de alguma maneira especial
-  donativoObraMundRecDashboard: any;
+  id: string | undefined;
+  mesReciboDashboard: string | undefined;
+  dataReciboDashboard: string | undefined; 
+  donativoObraMundRecDashboard: number;
   donativoDespCongrLocalRecDash: number;
-  donativoTipo: string;
+  donativoTipo: string | undefined;
   arranjoDeOnibus: number;
 
   constructor(data: any) {
-    this._id = data._id || 'ID não informado'; ;
-    this.mesReciboDashboard = data.mesReciboDashboard || 'Data não informada'; // Exemplo de fallback
-    this.dataReciboDashboard = data.dataReciboDashboard || 'Data não disponível';
-    this.donativoObraMundRecDashboard = data.donativoObraMundRecDashboard || 0;
-    this.donativoDespCongrLocalRecDash = data.donativoDespCongrLocalRecDash || 0;
-    this.donativoTipo = data.donativoTipo || 'Não especificado';
-    this.arranjoDeOnibus = data.arranjoDeOnibus || 0;
+    this.id = data.id || '';
+    this.mesReciboDashboard = data.mesReciboDashboard || '';
+    this.dataReciboDashboard = data.dataReciboDashboard || '';
+    this.donativoObraMundRecDashboard = data.donativoObraMundRecDashboard || undefined;
+    this.donativoDespCongrLocalRecDash = data.donativoDespCongrLocalRecDash || undefined;
+    this.donativoTipo = data.donativoTipo || '';
+    this.arranjoDeOnibus = data.arranjoDeOnibus || undefined;
   }
 }
 

@@ -13,24 +13,6 @@ import {
 import { ClasseRecibosDashboard } from '../../model/RecibosDashboardClasse';
 import { ReciboDashboardService } from '../../service/recibo-dashboard.service';
 import { RecibosCadasComponent } from '../cadastros/recibos-cadas/recibos-cadas.component';
-//import { PropertyDescriptor } from '@angular/core'; // Import PropertyDescriptor type
-
-// function LogRouteParameter(target: any, key: string, descriptor: PropertyDescriptor) {
-//   const originalMethod = descriptor.value;
-
-//   descriptor.value = function(...args: any[]) {
-//     // Aqui 'args' são os argumentos com os quais 'getParameterIdInRote' pode ser chamada, que no caso de Angular geralmente não são utilizados.
-//     if (this.routeActivated.snapshot.queryParams['id']) {
-//       console.log(`Function ${key} called with route ID: ${this['routeActivated'].snapshot.queryParams['id']}`);
-//       const result = originalMethod.apply(this, args);
-//       return result;
-//     } else {
-//       console.log(`Function ${key} called without valid route ID`);
-//       return null;
-//     }
-//   };
-//   return descriptor;
-// }
 
 @Component({
   selector: 'app-recibos-dashboard',
@@ -64,7 +46,7 @@ export class RecibosDashboardComponent {
 
   public dataDoMes: Date = new Date(); // Como pegar o mes corrente
 
-  listaRecibos: any[] = [];
+  listaRecibos: ClasseRecibosDashboard[] = [];
 
   ngOnInit() {
     // Buscando todos os recibos para lista
@@ -75,14 +57,11 @@ export class RecibosDashboardComponent {
   
   getParameterIdInRote(){
     // Pegando id da rota
-    this.routeActivated.queryParams.subscribe((params) => {
-      let id = params['id'];
-      if (id !== null && id !== undefined && id.lenght > 0) {
+    this.routeActivated.queryParams.subscribe((params) => {      
         this.reciboService.getRecibosDashboardFindAll()
           .subscribe((response) => {
             this.listaRecibos = response;
-          });
-      }
+        });    
     });
   }
 
@@ -122,7 +101,7 @@ export class RecibosDashboardComponent {
   }
 
   trackById(index: number, item: ClasseRecibosDashboard): string {
-    return item._id;  // Certifique-se de que é `id`, e não `_id`
+    return item.id ?? '';  // Use the nullish coalescing operator to return an empty string if item.id is undefined
   }
 
   novoRecibo() {

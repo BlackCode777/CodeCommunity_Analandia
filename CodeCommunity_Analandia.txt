@@ -1,3 +1,960 @@
+
+[[[ 
+  
+
+]]]
+
+
+
+
+
+
+*********************************************************************************
+[[[ 
+  gpt vamos recriar o arquivo de teste do zero!  Vamos começar este ponto:
+  "describe('CadastroAdicionarPostoComponent', () => {}"
+  o componente a ser testado éste: "CadastroAdicionarPostoComponent", este componente tem 
+  as seguintes funções:
+  '1) - Testar se o Component foi criado corretamente
+   2) - Testar FindPaginacao                          
+   3) - Testar GetPASContratados                        
+   4) - Testar GetPASContratadoPorID                          
+   5) - Testar PostAdicionarItem                          
+   6) - Testar editarPASContratadoItemPorIDTelaCadastro                          
+   7) - Testar DeletePASContratadoItemPorID '
+  e estes são os casos de teste para cada função:
+
+  '1) - Testar FindPaginacao: Verifica se o método FindPaginacao retorna os resultados paginados corretamente.
+   2) - Testar GetPASContratados: Verifica se o método GetPASContratados retorna a lista de pontos contratados corretamente.
+   3) - Testar GetPASContratadoPorID:Verifica se o método GetPASContratadoPorID retorna um ponto contratado pelo ID corretamente.
+   4) - Testar PostAdicionarItem: Verifica se o método PostAdicionarItem adiciona um novo ponto contratado corretamente.
+   5) - Testar editarPASContratadoItemPorIDTelaCadastro:Verifica se o método editarPASContratadoItemPorIDTelaCadastro edita um ponto contratado pelo ID corretamente.
+   6) - Testar DeletePASContratadoItemPorID: Verifica se o método DeletePASContratadoItemPorID deleta um ponto contratado pelo ID corretamente.'
+
+   para este teste precisamos configurar o describe e o beforeEach para criar o componente e os testes para cada função do serviço `CadastroAdicionarPostoComponent`.
+vamos começar, crie o teste.
+
+"
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CadastroAdicionarPostoComponent } from './cadastro-adicionar-posto.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+
+// Aumentar o timeout padrão do Jasmine
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
+describe('CadastroAdicionarPostoComponent', () => {
+  let component: CadastroAdicionarPostoComponent;
+  let fixture: ComponentFixture<CadastroAdicionarPostoComponent>;
+  let router: Router;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule, CadastroAdicionarPostoComponent],
+      providers: [
+        { provide: Router, useValue: { navigate: jasmine.createSpy('navigate') } }
+      ]
+    })
+    .compileComponents()
+    fixture = TestBed.createComponent(CadastroAdicionarPostoComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    router = TestBed.inject(Router);
+  });
+
+  it('0) - [CadastroAdicionarPostoComponent] - Deve criar o componente', () => {
+    expect(component).toBeTruthy();
+  });
+
+  // Adicione os testes para as funções restantes aqui
+
+});
+"
+
+]]]
+
+ e estou recebendo os seguintes erros:
+
+1 - ERRO no terminal da ide: ERRO AO ENVIAR O FORMULARIO
+
+2 - ERRO no terminal do navegador: zone.js:2706 Access to XMLHttpRequest at 'ng:///CadastroAdicionarPostoComponent.js' from origin 'http://localhost:9876' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted.
+
+3 - ERRO no frontend da tela de teste no jasmine: TypeError: Cannot read properties of undefined (reading 'subscribe'),
+
+pelo que estou entendendo o teste está de fato enviando uma requisição para a API para tentar salvar
+dados no banco, mas não é isso que preciso fazer, preciso apenas testar se o componente está funcionando, então corrija o código para simular
+o envio do formulário sem enviar uma requisição para a API, para atender ao requisito "Deve criar o componente".
+
+
+
+
+
+
+
+ ]]]
+
+
+
+
+
+
+
+
+
+******************************************************************************
+******************************************************************************
+******************************************************************************
+CadastroAdiconarPostoComponent
+
+estou recebendo este erro:
+"CadastroAdicionarPostoComponent > 0) - [CadastroAdicionarPostoComponent] - Deve criar o componente
+TypeError: Cannot read properties of undefined (reading 'root')",
+
+e estou com esta configuração para o ambiente de teste
+"import { ComponentFixture, TestBed } from '@angular/core/testing'; 
+import { CadastroAdicionarPostoComponent } from './cadastro-adicionar-posto.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+ 
+describe('CadastroAdicionarPostoComponent', () => {
+  let component: CadastroAdicionarPostoComponent;
+  let fixture: ComponentFixture<CadastroAdicionarPostoComponent>;
+  let router: Router;
+ 
+  beforeEach( async () => {
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule, CadastroAdicionarPostoComponent],
+      providers: [
+        { provide: Router, useValue: { navigate: jasmine.createSpy('navigate') } }
+      ]
+    })
+    .compileComponents()
+    fixture = TestBed.createComponent(CadastroAdicionarPostoComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    router = TestBed.inject(Router);
+  });
+ 
+  it('0) - [CadastroAdicionarPostoComponent] - Deve criar o componente', () => {
+    expect(component).toBeTruthy();
+  });
+ 
+});", corrija o código de teste para atender ao requisito 
+
+
+
+******************************************************************************
+******************************************************************************
+******************************************************************************
+Claro! Vamos listar as funções existentes no serviço `PASCadastradosService` e criar casos de teste para cada uma delas.
+
+### Funções Existentes no `PASCadastradosService`
+
+1. **`FindPaginacao(pageNumber: number, pageSize: number, filtroDesc: string): Observable<any>`**
+2. **`GetPASContratados(): Observable<any>`**
+3. **`GetPASContratadoPorID(id: string): Observable<PAsContratados>`**
+4. **`PostAdicionarItem(pACadastrados: PAsContratados): Observable<PAsContratados>`**
+5. **`editarPASContratadoItemPorIDTelaCadastro(id: string): Observable<any>`**
+6. **`DeletePASContratadoItemPorID(id: string): Observable<any>`**
+
+### Casos de Teste para o Serviço `PASCadastradosService`
+
+Aqui estão os casos de teste para cada função:
+
+#### Arquivo de Teste Completo: `PASCadastradosService.service.test.ts`
+
+```typescript
+import { TestBed } from '@angular/core/testing';
+import { PASCadastradosService } from './pascadastrados.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from '../../environments/environments';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PAsContratados } from '../modal/PAsCadastrados';
+
+describe('PASCadastradosService', () => {
+    let service: PASCadastradosService;
+    let httpMock: HttpTestingController;
+    let apiUrl = environment.API_URL + "pontos.contratados.api";
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [RouterTestingModule, HttpClientTestingModule],
+            providers: [PASCadastradosService]
+        });
+        service = TestBed.inject(PASCadastradosService);
+        httpMock = TestBed.inject(HttpTestingController);
+    });
+
+    afterEach(() => {
+        httpMock.verify();
+    });
+
+    it('0) - [PASCadastradosService] - should be created', () => {
+        expect(service).toBeTruthy();
+    });
+
+    it('1) - [FindPaginacao] - should return paginated results', () => {
+        const pageNumber = 1;
+        const pageSize = 10;
+        const filtroDesc = 'test';
+        const mockResponse = { data: 'paginated results' };
+
+        service.FindPaginacao(pageNumber, pageSize, filtroDesc).subscribe(response => {
+            expect(response).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne(`${apiUrl}/findpaginacao?pageNumber=${pageNumber}&pageSize=${pageSize}&filtroDesc=${filtroDesc}`);
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+    });
+
+    
+    it('2) - [GetPASContratados] - should return list of contracted points', () => {
+        const mockResponse = { data: 'contracted points list' };
+
+        service.GetPASContratados().subscribe(response => {
+            expect(response).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne(`${apiUrl}/findPontoContratado`);
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+    });
+
+    it('3) - [GetPASContratadoPorID] - should return a contracted point by ID', () => {
+        const id = '123';
+        const mockResponse: PAsContratados = { id, dataCriacao: '2021-01-01', idPosto: '123', nomePosto: 'Posto 1', quantidadePontos: 10 };
+
+        service.GetPASContratadoPorID(id).subscribe(response => {
+            expect(response).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne(`${apiUrl}/findPontoContratado/${id}`);
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+    });
+
+    it('4) - [PostAdicionarItem] - should add a new contracted point', () => {
+        const newItem: PAsContratados = { id: '123', dataCriacao: '2021-01-01', idPosto: '123', nomePosto: 'Posto 1', quantidadePontos: 10 };
+        const mockResponse = newItem;
+
+        service.PostAdicionarItem(newItem).subscribe(response => {
+            expect(response).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne(`${apiUrl}/pontoContratado`);
+        expect(req.request.method).toBe('POST');
+        expect(req.request.body).toEqual(newItem);
+        req.flush(mockResponse);
+    });
+    
+
+    it('5) - [editarPASContratadoItemPorIDTelaCadastro] - should edit a contracted point by ID', () => {
+        const id = '123';
+        const mockResponse = { data: 'edited contracted point' };
+
+        service.editarPASContratadoItemPorIDTelaCadastro(id).subscribe(response => {
+            expect(response).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne(`${apiUrl}/findbyId/${id}`);
+        expect(req.request.method).toBe('GET');
+        req.flush(mockResponse);
+    });
+
+    it('6) - [DeletePASContratadoItemPorID] - should delete a contracted point by ID', () => {
+        const id = '123';
+        const mockResponse = { data: 'deleted contracted point' };
+
+        service.DeletePASContratadoItemPorID(id).subscribe(response => {
+            expect(response).toEqual(mockResponse);
+        });
+
+        const req = httpMock.expectOne(`${apiUrl}/deletar/${id}`);
+        expect(req.request.method).toBe('DELETE');
+        req.flush(mockResponse);
+    });
+});
+
+
+```
+
+### Explicação dos Casos de Teste
+
+1. **Testar Criação do Serviço**:
+   - Verifica se o serviço `PASCadastradosService` é criado corretamente.
+
+2. **Testar `FindPaginacao`**:
+   - Verifica se o método `FindPaginacao` retorna os resultados paginados corretamente.
+
+3. **Testar `GetPASContratados`**:
+   - Verifica se o método `GetPASContratados` retorna a lista de pontos contratados corretamente.
+
+4. **Testar `GetPASContratadoPorID`**:
+   - Verifica se o método `GetPASContratadoPorID` retorna um ponto contratado pelo ID corretamente.
+
+5. **Testar `PostAdicionarItem`**:
+   - Verifica se o método `PostAdicionarItem` adiciona um novo ponto contratado corretamente.
+
+6. **Testar `editarPASContratadoItemPorIDTelaCadastro`**:
+   - Verifica se o método `editarPASContratadoItemPorIDTelaCadastro` edita um ponto contratado pelo ID corretamente.
+
+7. **Testar `DeletePASContratadoItemPorID`**:
+   - Verifica se o método `DeletePASContratadoItemPorID` deleta um ponto contratado pelo ID corretamente.
+
+Cada caso de teste verifica se o método HTTP correto é chamado e se a resposta esperada é retornada. Esses testes 
+garantem que o serviço `PASCadastradosService` funcione corretamente em todas as suas funções.
+
+
+
+
+
+
+******************************************************************************
+******************************************************************************
+******************************************************************************
+
+Teste do componente PAsContratados
+"import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild, inject } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ActivatedRoute } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { PAsContratados } from '../../../modal/PAsCadastrados';
+import { PASCadastradosService } from '../../../service/pascadastrados.service';
+@Component({
+    selector: 'app-pas-cadastrados',
+    standalone: true,
+    imports: [
+        MatSidenavModule,
+        MatCardModule,
+        MatMenuModule,
+        CommonModule,
+        RouterLink,
+        RouterOutlet,
+        RouterModule,
+        FormsModule,
+        MatPaginatorModule,
+    ],
+    templateUrl: './pas-cadastrados.component.html',
+    styleUrl: './pas-cadastrados.component.scss',
+})
+export class PasCadastradosComponent implements OnInit {
+ 
+    public data = [];
+    public body: PAsContratados[] = [];
+    novoItem: PAsContratados = new PAsContratados();
+ 
+    // Paginação
+    pageEvent: PageEvent | undefined;
+    totalPages: any;
+    pageSize: any;
+    pageIndex: any;
+    disabled = false;
+    showFirstLastButtons = true;
+    hidePageSize = false;
+    showPageSizeOptions = true;
+ 
+    //Pesquisa
+    pesquisaIdPonto: string = '';
+    @ViewChild('mySelect') mySelect: any;
+    @ViewChild('mySelectFiltro') mySelectFiltro: any;
+ 
+    constructor( private pASContratService: PASCadastradosService, public dialog: MatDialog,
+        private routeActivated: ActivatedRoute, private router: Router, private cdr: ChangeDetectorRef, private zone: NgZone ) {
+        // Login
+        try {
+            let login = localStorage.getItem('login');
+            if (login == null || login == undefined)
+              this.router.navigate(['iniciar']);
+          }
+          catch (ex) {
+            this.router.navigate(['iniciar']);
+          }
+    }
+ 
+    ngOnInit() {
+        this.routeActivated.queryParams.subscribe((params) => {
+            let id = params["id"]
+            if( id !== null && id !== undefined ){
+                this.editarPASContratadoItemPorIDTelaCadastro(id)
+            }
+        })
+    }
+ 
+    //editar por id
+    editarPASContratadoItemPorIDTelaCadastro(id:string): void{
+        this.pASContratService.editarPASContratadoItemPorIDTelaCadastro(id?.toString()).subscribe(
+            (response) => {
+                let p = response["pontos"];
+                this.novoItem.id = p["id"];
+                this.novoItem.dataCriacao = p["dataCriacao"];
+                this.novoItem.idPosto = p["idPosto"];
+                this.novoItem.nomePosto = p["nomePosto"];
+                this.novoItem.quantidadePontos = p["quantidadepontos"];
+            },
+            (error) => {
+                console.error("Erro ao atualizar item", error);
+            }
+        )
+    }
+ 
+    Limpar(){
+      this.novoItem.dataCriacao = '';
+      this.novoItem.id = '';
+      this.novoItem.idPosto = undefined;
+      this.novoItem.nomePosto = "";
+      this.mySelect.nativeElement.value = '';
+    }
+ 
+    voltar(){
+        this.router.navigate(['pas-listagem'])
+    }
+ 
+    submitForm() {
+        console.log('Formulário submetido:', this.novoItem);
+        this.pASContratService
+            .PostAdicionarItem(this.novoItem)
+            .subscribe(
+                () => {
+                    //console.log('Novo item adicionado com sucesso');
+                    this.novoItem = new PAsContratados();
+                },
+                (error) => {
+                    console.error('Erro ao adicionar o novo item: ', error);
+                }
+            );
+    }
+ 
+    pageSizeOptions: number[] = [5, 10, 25];
+    setPageSizeOptions(setPageSizeOptionsInput: string) {
+        if (setPageSizeOptionsInput) {
+            this.pageSizeOptions = setPageSizeOptionsInput
+                .split(',')
+                .map((str) => +str);
+        }
+    }
+ 
+}", 
+
+A classe de teste para este componente é a seguinte:
+"import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PasCadastradosComponent } from './pas-cadastrados.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from 'express';
+import { PASCadastradosService } from '../../../service/pascadastrados.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { of } from 'rxjs';
+import { PAsContratados } from '../../../modal/PAsCadastrados';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+ 
+describe('PasCadastradosComponent', () => {
+    let component: PasCadastradosComponent;
+    let fixture: ComponentFixture<PasCadastradosComponent>;
+ 
+    beforeEach((done) => {
+        TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule,
+                RouterTestingModule,
+                PasCadastradosComponent],
+            schemas: [NO_ERRORS_SCHEMA]
+        }).compileComponents()
+        .then(() => {
+            fixture = TestBed.createComponent(PasCadastradosComponent);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+            done();
+        });
+    });
+ 
+    it("0) - [PasCadastrados] - Criação do componente PasCadastradosComponent!", () => {
+        expect(component).toBeTruthy();
+    });
+ 
+    // Partindo deste trecho de código - vamos criar os próximos casos de teste
+ 
+ 
+});", 
+
+analise este código e de acordo com os casos de teste a seguir, crie os testes unitários para o componente PasCadastradosComponent.
+
+"casos de teste:
+1) editarPASContratadoItemPorIDTelaCadastro(id: string): Método que edita um item de PAS contratado por ID.
+2) Limpar(): Método que limpa os campos do formulário.
+3) voltar(): Método que redireciona para a página de listagem de PAS.
+4) submitForm(): Método que envia o formulário para adicionar um novo item de PAS contratado.
+5) setPageSizeOptions(setPageSizeOptionsInput: string): Método que define as opções de tamanho de página para a paginação.",
+
+crie casos de teste para cada função existente no código do componente PasCadastradosComponent.
+
+"
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PasCadastradosComponent } from './pas-cadastrados.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from 'express';
+import { PASCadastradosService } from '../../../service/pascadastrados.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { of } from 'rxjs';
+
+import { PAsContratados } from '../../../modal/PAsCadastrados';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+
+
+describe('PasCadastradosComponent', () => {
+  let component: PasCadastradosComponent;
+  let fixture: ComponentFixture<PasCadastradosComponent>;
+
+  beforeEach((done) => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        PasCadastradosComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents()
+    .then(() => {
+      fixture = TestBed.createComponent(PasCadastradosComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+      done();
+    });
+  });
+
+  it("0) - [PasCadastrados] - Criação do componente PasCadastradosComponent!", () => {
+    expect(component).toBeTruthy();
+  });
+
+  it("1) - [PasCadastrados] - Deve chamar o método editarPASContratadoItemPorIDTelaCadastro() ao inicializar o componente.", () => {
+    spyOn(component, 'editarPASContratadoItemPorIDTelaCadastro');
+    component.ngOnInit();
+    expect(component.editarPASContratadoItemPorIDTelaCadastro).toHaveBeenCalled();
+  });
+
+  it("2) - [PasCadastrados] - Deve limpar() os campos do formulário.", () => {
+    component.Limpar();
+    expect(component.novoItem.dataCriacao).toBe('');
+    expect(component.novoItem.id).toBe('');
+    expect(component.novoItem.idPosto).toBe(undefined);
+    expect(component.novoItem.nomePosto).toBe('');
+    expect(component.mySelect.nativeElement.value).toBe('');
+  });
+
+  it("3) - [PasCadastrados] - Deve voltar() redirecionar para a página de listagem de PAS.", () => {
+    spyOn(component.router, 'navigate');
+    component.voltar();
+    expect(component.router.navigate).toHaveBeenCalledWith(['pas-listagem']);
+  });
+
+  it("4) - [PasCadastrados] - Deve chamar submitForm() e enviar o formulário para adicionar um novo item de PAS contratado.", () => {
+    spyOn(component.pASContratService, 'PostAdicionarItem').and.returnValue(of());
+    component.submitForm();
+    expect(component.pASContratService.PostAdicionarItem).toHaveBeenCalled();
+  });
+
+  it("5) - [PasCadastrados] - Deve chamar setPageSizeOptions(setPageSizeOptionsInput: string) e definir as opções de tamanho de página para a paginação.", () => {
+    const setPageSizeOptionsInput = '5,10,25';
+    component.setPageSizeOptions(setPageSizeOptionsInput);
+    expect(component.pageSizeOptions).toEqual([5, 10, 25]);
+  });
+
+
+})"
+******************************************************************************
+Para esta função 
+"Limpar(){
+      this.novoItem.dataCriacao = '';
+      this.novoItem.id = '';
+      this.novoItem.idPosto = undefined;
+      this.novoItem.nomePosto = "";
+      this.mySelect.nativeElement.value = '';
+    }", tenho este caso de teste 
+"it("2) - [PasCadastrados] - Deve limpar() os campos do formulário.", () => {
+        component.Limpar();
+        expect(component.novoItem.dataCriacao).toBe('');
+        expect(component.novoItem.id).toBe('');
+        expect(component.novoItem.idPosto).toBe(undefined);
+        expect(component.novoItem.nomePosto).toBe('');
+        expect(component.mySelect.nativeElement.value).toBe('');
+    });", para atender a este requisito "Deve limpar() os campos do formulário.", mas estou recebendo este erro:
+"PasCadastradosComponent > 2) - [PasCadastrados] - Deve limpar() os campos do formulário.
+TypeError: Cannot read properties of undefined (reading 'nativeElement')
+    at PasCadastradosComponent.Limpar (http://localhost:9876/_karma_webpack_/webpack:/src/app/components/cadastros/pas-cadastrados/pas-cadastrados.component.ts:95:21)
+    at UserContext.apply (http://localhost:9876/_karma_webpack_/webpack:/src/app/components/cadastros/pas-cadastrados/pas-cadastrados.component.spec.ts:68:19)     
+    at _ZoneDelegate.invoke (http://localhost:9876/_karma_webpack_/webpack:/node_modules/zone.js/fesm2015/zone.js:368:26)     
+    at ProxyZoneSpec.onInvoke (http://localhost:9876/_karma_webpack_/webpack:/node_modules/zone.js/fesm2015/zone-testing.js:273:39)     
+    at _ZoneDelegate.invoke (http://localhost:9876/_karma_webpack_/webpack:/node_modules/zone.js/fesm2015/zone.js:367:52)     
+    at Zone.run (http://localhost:9876/_karma_webpack_/webpack:/node_modules/zone.js/fesm2015/zone.js:129:43)     
+    at runInTestZone (http://localhost:9876/_karma_webpack_/webpack:/node_modules/zone.js/fesm2015/zone-testing.js:555:34)     
+    at UserContext.<anonymous> (http://localhost:9876/_karma_webpack_/webpack:/node_modules/zone.js/fesm2015/zone-testing.js:570:20)     
+    at <Jasmine", corrija o código para atender a este requisito "Deve limpar() os campos do formulário.".
+    se for necessário modificar algum outro trecho de código para corrigir o erro, mostre somente o trecho de código que precisa ser modificado.
+
+"it("2) - [PasCadastrados] - Deve limpar() os campos do formulário.", () => {
+        component.novoItem.dataCriacao = '2021-01-01';
+        component.novoItem.id = '1';
+        component.novoItem.idPosto = 123;
+        component.novoItem.nomePosto = 'Posto 1';
+        component.mySelect = { nativeElement: { value: 'value' } };
+        component.Limpar();
+        expect(component.novoItem.dataCriacao).toBe('');
+        expect(component.novoItem.id).toBe('');
+        expect(component.novoItem.idPosto).toBe(undefined);
+        expect(component.novoItem.nomePosto).toBe('');
+        expect(component.mySelect.nativeElement.value).toBe('');
+    });"
+******************************************************************************
+
+para esta função: 
+'editarPASContratadoItemPorIDTelaCadastro(id:string): void{
+        this.pASContratService.editarPASContratadoItemPorIDTelaCadastro(id?.toString()).subscribe(
+            (response) => {
+                let p = response["pontos"];
+                this.novoItem.id = p["id"];
+                this.novoItem.dataCriacao = p["dataCriacao"];
+                this.novoItem.idPosto = p["idPosto"];
+                this.novoItem.nomePosto = p["nomePosto"];
+                this.novoItem.quantidadePontos = p["quantidadepontos"];
+            },
+            (error) => {
+                console.error("Erro ao atualizar item", error);
+            }
+        )
+    }'
+tenho este caso de teste:
+'it("1) - [PasCadastrados] - Deve chamar o método editarPASContratadoItemPorIDTelaCadastro() ao inicializar o componente.", () => {
+    spyOn(component, 'editarPASContratadoItemPorIDTelaCadastro');
+    component.ngOnInit();
+    expect(component.editarPASContratadoItemPorIDTelaCadastro).toHaveBeenCalled();
+  });'
+
+estou recebendo este erro "PasCadastradosComponent > Deve chamar o método editarPASContratadoItemPorIDTelaCadastro() ao inicializar o componente
+Error: <spyOn> : could not find an object to spy upon for editarPASContratadoItemPorIDTelaCadastro() Usage: spyOn(<object>, <methodName>)",
+refatore este código de caso de teste "it('Deve chamar o método editarPASContratadoItemPorIDTelaCadastro() ao inicializar o componente', () => {
+        // Espiando o método do serviço que é chamado dentro do método do componente
+ 
+        const spyService = spyOn(pasCadastradosService, 'editarPASContratadoItemPorIDTelaCadastro').and.returnValue(of({
+            pontos: {
+                id: '1',
+                dataCriacao: '2021-01-01',
+                idPosto: '123',
+                nomePosto: 'Posto 1',
+                quantidadepontos: 10
+            }
+        }));
+ 
+        // Chamando o método ngOnInit para simular a inicialização do componente
+        component.ngOnInit();
+ 
+        // Verificando se o método do serviço foi chamado com o argumento esperado
+        expect(spyService).toHaveBeenCalledWith('1');
+ 
+        // Verificando se os valores foram atribuídos corretamente
+        expect(component.novoItem.id).toBe('1');
+        expect(component.novoItem.dataCriacao).toBe('2021-01-01');
+        expect(component.novoItem.idPosto).toBe(123);
+        expect(component.novoItem.nomePosto).toBe('Posto 1');
+        expect(component.novoItem.quantidadePontos).toBe(10);
+    });", 
+para atender a este requisito "Deve chamar o método editarPASContratadoItemPorIDTelaCadastro() ao inicializar o componente.".
+
+
+"it("1) - [PasCadastrados] - Deve chamar o método editarPASContratadoItemPorIDTelaCadastro() ao inicializar o componente.", () => {
+    spyOn(component, 'editarPASContratadoItemPorIDTelaCadastro');
+    component.ngOnInit();
+    expect(component.editarPASContratadoItemPorIDTelaCadastro).toHaveBeenCalled();
+  });", OK - funcionou.
+
+"// Caso de Teste 3: Deve voltar() redirecionar para a página de listagem de PAS.
+    it('Deve voltar() redirecionar para a página de listagem de PAS', () => {
+        const spy = router.navigate;
+        component.voltar();
+        expect(spy).toHaveBeenCalledWith(['pas-listagem']);
+    });", analise este código e verifique se ele está correto. Se não estiver, corrija-o para atender ao requisito "Deve voltar() redirecionar para a página de listagem de PAS.".
+
+"it("3) - [PasCadastrados] - Deve voltar() redirecionar para a página de listagem de PAS.", () => {
+    spyOn(component.router, 'navigate');
+    component.voltar();
+    expect(component.router.navigate).toHaveBeenCalledWith(['pas-listagem']);
+  });", OK - funcionou.
+
+"// Caso de Teste 4: Deve chamar submitForm() e enviar o formulário para adicionar um novo item de PAS contratado.
+    it('Deve chamar submitForm() e enviar o formulário para adicionar um novo item de PAS contratado', () => {
+        const spy = pasCadastradosService.PostAdicionarItem.and.returnValue(of({}));
+        component.novoItem = { id: '1', dataCriacao: '2021-01-01', idPosto: '123', nomePosto: 'Posto 1', quantidadePontos: 10 };
+        component.submitForm();
+        expect(spy).toHaveBeenCalledWith(component.novoItem);
+        expect(component.novoItem).toEqual(new PAsContratados());
+    });", analise este código e verifique se ele está correto. Se não estiver, corrija-o para atender ao requisito 
+    "Deve chamar submitForm() e enviar o formulário para adicionar um novo item de PAS contratado.".
+
+"it("4) - [PasCadastrados] - Deve chamar submitForm() e enviar o formulário para adicionar um novo item de PAS contratado.", () => {
+    spyOn(component.pASContratService, 'PostAdicionarItem').and.returnValue(of());
+    component.submitForm();
+    expect(component.pASContratService.PostAdicionarItem).toHaveBeenCalled();
+  });", OK - funcionou.       
+
+1) editarPASContratadoItemPorIDTelaCadastro(id: string): Método que edita um item de PAS contratado por ID.
+2) Limpar(): Método que limpa os campos do formulário.
+3) voltar(): Método que redireciona para a página de listagem de PAS.
+4) submitForm(): Método que envia o formulário para adicionar um novo item de PAS contratado.
+5) setPageSizeOptions(setPageSizeOptionsInput: string): Método que define as opções de tamanho de página para a paginação.
+
+
+******************************************************************************
+******************************************************************************
+******************************************************************************
+
+Teste do serviço de indicador
+
+"import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { RequestOptions } from '../modal/RequestOptions';
+import { environment } from '../../environments/environments';
+import { indicador } from '../modal/Indicador';
+ 
+@Injectable({
+  providedIn: 'root',
+})
+export class IndicadorService {
+  constructor(private http: HttpClient) {}
+  private apiUrl = environment.API_URL;
+  private map = this.apiUrl+"ss.indicadores";
+  findIndicadores(): Observable<any> {
+    //const myParams = new HttpParams().set('password',"admin").set('username', "admin");
+    const headers = new HttpHeaders({'Content-Type':'application/json;'});
+    //console.log(this.apiUrl);
+    return this.http.get(this.map+'/findIndicadores', {withCredentials: true});
+  }
+ 
+  obterIndicadorPorCodigo(codigo: number): Observable<any> {
+    const url = this.map+'/IndicadorByCodigo/'+codigo;
+    return this.http.get(url);
+  }
+ 
+  getIndicador(): Observable<any> {
+    return this.http.get<any>(this.map+'/findEtapas1', {withCredentials: true});
+  }
+ 
+  getIndPaginacao(pageNumber: number, pageSize: number, filtroDesc: string, filtroCodigo: number | undefined, filtroEtapa: string): Observable<any> {
+    //return this.http.get(this.apiUrl+this.map+'/find', {withCredentials: true});
+    if(filtroCodigo != undefined)
+      return this.http.get(this.map+'/findpaginacao?pageNumber='+pageNumber+'&pageSize='+pageSize+'&filtroDesc='+filtroDesc+'&filtroCodigo='+filtroCodigo+'&filtroEtapa='+filtroEtapa, {withCredentials: true});
+    else
+      return this.http.get(this.map+'/findpaginacao?pageNumber='+pageNumber+'&pageSize='+pageSize+'&filtroDesc='+filtroDesc+'&filtroCodigo=&filtroEtapa='+filtroEtapa, {withCredentials: true});
+ 
+  }
+ 
+  adicionarItem(item: indicador): Observable<indicador> {
+    return this.http.post<indicador>(this.map+'/cadastro', item, {withCredentials: true});
+  }
+ 
+  deleteItem(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.map}/deletar/${id}`);
+  }
+ 
+  editarItem(id: string): Observable<any> {
+    return this.http.get<any>(`${this.map}/findbyId/${id}`);
+  }
+ 
+}", analise este código dos serviços e faça uma listagem dos nomes das funções existentes no código.
+
+Funções existentes no serviço IndicadorService:
+
+1) findIndicadores(): Método que busca os indicadores no servidor.
+2) obterIndicadorPorCodigo(codigo: number): Método que obtém um indicador por código.
+3) getIndicador(): Método que obtém os indicadores da etapa 1.
+4) getIndPaginacao(pageNumber: number, pageSize: number, filtroDesc: string, filtroCodigo: number | undefined, filtroEtapa: string): Método que obtém os indicadores com paginação e filtros.
+5) adicionarItem(item: indicador): Método que adiciona um novo item de indicador.
+6) deleteItem(id: string): Método que deleta um item de indicador por ID.
+7) editarItem(id: string): Método que edita um item de indicador por ID.
+
+Essas são as funções existentes no serviço IndicadorService. 
+Cada função executa uma ação específica, como buscar, adicionar, editar ou deletar indicadores, entre outras ações.
+Agora crie um caso de teste para cada função existente no código do serviço IndicadorService.
+
+"should call findIndicadores and return a list of indicators" traduza
+"should call findIndicadores and return a list of indicators" significa "deve chamar findIndicadores e retornar uma lista de indicadores".
+
+"should call obterIndicadorPorCodigo and return an indicator" traduza
+"should call obterIndicadorPorCodigo and return an indicator" significa "deve chamar obterIndicadorPorCodigo e retornar um indicador".
+
+"should call getIndicador and return a list of etapa 1 indicators" traduza
+"should call getIndicador and return a list of etapa 1 indicators" significa "deve chamar getIndicador e retornar uma lista de indicadores da etapa 1".
+
+***************************************************************************
+***************************************************************************
+***************************************************************************
+
+"import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, NgZone, OnInit, ViewChild, inject } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ActivatedRoute } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { PAsContratados } from '../../../modal/PAsCadastrados';
+import { PASCadastradosService } from '../../../service/pascadastrados.service';
+@Component({
+    selector: 'app-pas-cadastrados',
+    standalone: true,
+    imports: [
+        MatSidenavModule,
+        MatCardModule,
+        MatMenuModule,
+        CommonModule,
+        RouterLink,
+        RouterOutlet,
+        RouterModule,
+        FormsModule,
+        MatPaginatorModule,
+    ],
+    templateUrl: './pas-cadastrados.component.html',
+    styleUrl: './pas-cadastrados.component.scss',
+})
+export class PasCadastradosComponent implements OnInit {
+ 
+    public data = [];
+    public body: PAsContratados[] = [];
+    novoItem: PAsContratados = new PAsContratados();
+ 
+    // Paginação
+    pageEvent: PageEvent | undefined;
+    totalPages: any;
+    pageSize: any;
+    pageIndex: any;
+    disabled = false;
+    showFirstLastButtons = true;
+    hidePageSize = false;
+    showPageSizeOptions = true;
+ 
+    //Pesquisa
+    pesquisaIdPonto: string = '';
+    @ViewChild('mySelect') mySelect: any;
+    @ViewChild('mySelectFiltro') mySelectFiltro: any;
+ 
+    constructor( private pASContratService: PASCadastradosService, public dialog: MatDialog,
+        private routeActivated: ActivatedRoute, private router: Router, private cdr: ChangeDetectorRef, private zone: NgZone ) {
+        // Login
+        try {
+            let login = localStorage.getItem('login');
+            if (login == null || login == undefined)
+              this.router.navigate(['iniciar']);
+          }
+          catch (ex) {
+            this.router.navigate(['iniciar']);
+          }
+    }
+ 
+    ngOnInit() {
+        this.routeActivated.queryParams.subscribe((params) => {
+            let id = params["id"]
+            if( id !== null && id !== undefined ){
+                this.editarPASContratadoItemPorIDTelaCadastro(id)
+            }
+        })
+    }
+ 
+    //editar por id
+    editarPASContratadoItemPorIDTelaCadastro(id:string): void{
+        this.pASContratService.editarPASContratadoItemPorIDTelaCadastro(id?.toString()).subscribe(
+            (response) => {
+                let p = response["pontos"];
+                this.novoItem.id = p["id"];
+                this.novoItem.dataCriacao = p["dataCriacao"];
+                this.novoItem.idPosto = p["idPosto"];
+                this.novoItem.nomePosto = p["nomePosto"];
+                this.novoItem.quantidadePontos = p["quantidadepontos"];
+            },
+            (error) => {
+                console.error("Erro ao atualizar item", error);
+            }
+        )
+    }
+ 
+    Limpar(){
+      this.novoItem.dataCriacao = '';
+      this.novoItem.id = '';
+      this.novoItem.idPosto = undefined;
+      this.novoItem.nomePosto = "";
+      this.mySelect.nativeElement.value = '';
+    }
+ 
+    voltar(){
+        this.router.navigate(['pas-listagem'])
+    }
+ 
+    submitForm() {
+        console.log('Formulário submetido:', this.novoItem);
+        this.pASContratService
+            .PostAdicionarItem(this.novoItem)
+            .subscribe(
+                () => {
+                    //console.log('Novo item adicionado com sucesso');
+                    this.novoItem = new PAsContratados();
+                },
+                (error) => {
+                    console.error('Erro ao adicionar o novo item: ', error);
+                }
+            );
+    }
+ 
+    pageSizeOptions: number[] = [5, 10, 25];
+    setPageSizeOptions(setPageSizeOptionsInput: string) {
+        if (setPageSizeOptionsInput) {
+            this.pageSizeOptions = setPageSizeOptionsInput
+                .split(',')
+                .map((str) => +str);
+        }
+    }
+ 
+}", analise este código e faça uma listagem das funções existentes no código.
+
+Funções existentes no componente PasCadastradosComponent:
+
+
+Essas são as funções existentes no código do componente PasCadastradosComponent.
+
+Agora crie um caso de teste para cada função existente no código do componente PasCadastradosComponent.
+
+"Teste unitário 1: Deve chamar o método editarPASContratadoItemPorIDTelaCadastro() ao inicializar o componente."
+"Teste unitário 2: Deve limpar() os campos do formulário."
+"Teste unitário 3: Deve voltar() redirecionar para a página de listagem de PAS."
+"Teste unitário 4: Deve chamar submitForm() e enviar o formulário para adicionar um novo item de PAS contratado."
+"Teste unitário 5: Deve chamar setPageSizeOptions(setPageSizeOptionsInput: string) e definir as opções de tamanho de página para a paginação.",
+crie casos de teste para cada função existente no código do componente PasCadastradosComponent.
+
+
+******************************************************************************
+******************************************************************************
+******************************************************************************
 analise o código abaixo e faça uma lista das funções existentes no código:
 "import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
